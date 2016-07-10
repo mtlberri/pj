@@ -65,7 +65,7 @@
       <div class="container">
         <h1>Local, Organic Juices <br>Delivered to Your Door</h1>
         <p>Delivering amazing Juices of freshly pressed juices of veggetables and fruits.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+        <p><a class="btn btn-default" href="#" role="button">Learn more about us &raquo;</a></p>
       </div>
     </div>
 
@@ -76,8 +76,13 @@
         <div class="col-md-4">
           <h2>The <i>"Red Orange"</i></h2>
           <img class="juices_main_page" src="images/red_orange-original.JPG" alt="Red Orange Juice">
-          <p>The <i>"Red Orange"</i> is a perfect mix of Beet </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <p>
+            The <i>"Red Orange"</i> is a perfect mix of <i>Beet</i> and <i>Carrots</i> as main ingredients. It is sweetened by <i>Apple</i> and spiced by <i>Ginger</i>.
+          </p>
+          <p>
+            Profile: Vitamin A, Vitamin C, ...
+          </p>
+          <p><a class="btn btn-primary btn-lg" href="#" role="button" id="red_orange_order_button">Order! &raquo;</a></p>
         </div>
         </section>
 
@@ -114,7 +119,23 @@
       });
 
     });
-    
+  </script>
+
+  <script>
+    var order_red_orange = document.getElementById("red_orange_order_button");
+
+    red_orange_order_button.addEventListener("click", function() {
+
+      console.log("Red Orange ordered!");
+
+      firebase.database().ref("orders/").push({
+        user: "Dummy user 1",
+        juice_id: "Red Orange",
+        qty: 1,
+        delivery_adress: "2350 Boulvd Saint-Laurent"
+      });
+
+    });
 
   </script>
 
