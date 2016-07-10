@@ -3,3 +3,9 @@ body {
   padding-top: 50px;
   padding-bottom: 20px;
 }
+
+img.juices_main_page {
+	float: right;
+	width:50%; 
+	height:50%;
+}
