@@ -69,7 +69,7 @@
           user.getToken().then(function(accessToken) {
             document.getElementById('sign-in-status').textContent = 'Signed in';
             document.getElementById('sign-in').textContent = 'Sign out';
-            
+            var account-details_tmp;
             document.getElementById('account-details').textContent = JSON.stringify({
               displayName: displayName,
               email: email,
