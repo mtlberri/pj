@@ -35,11 +35,11 @@
     <script>
             // FirebaseUI config.
       var uiConfig = {
-        'signInSuccessUrl': '<url-to-redirect-to-on-success>',
+        'signInSuccessUrl': 'https://plateaujuicing.firebaseapp.com/',
         'signInOptions': [
           // Leave the lines as is for the providers you want to offer your users.
           //firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-          //firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+          firebase.auth.FacebookAuthProvider.PROVIDER_ID,
           //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
           //firebase.auth.GithubAuthProvider.PROVIDER_ID,
           firebase.auth.EmailAuthProvider.PROVIDER_ID
@@ -58,6 +58,24 @@
   </head>
 
   <body>
+  <!-- Facebook SDK for Javascript -->
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '651800564970614',
+        xfbml      : true,
+        version    : 'v2.6'
+      });
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -79,7 +97,6 @@
               <input type="password" placeholder="Password" class="form-control" id="password">
             </div>
             <button type="submit" class="btn btn-success" id="signin_button">Sign in</button>
-            <button type="submit" class="btn btn-success" id="newuser_button">New User?</button>
           </form>
         </div><!--/.navbar-collapse -->
       </div>
@@ -92,6 +109,8 @@
         <p>Delivering amazing Juices of freshly pressed juices of veggetables and fruits.</p>
         <p><a class="btn btn-default" href="#" role="button">Learn more about us &raquo;</a></p>
       </div>
+      <!-- Firebase UI Auth container -->
+      <div id="firebaseui-auth-container"></div>
     </div>
 
     <div class="container">
@@ -122,11 +141,6 @@
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
       </div>
-
-      <!-- The surrounding HTML is left untouched by FirebaseUI.
-               Your app may use that space for branding, controls and other customizations.-->
-          <h1>FirebaseUI</h1>
-          <div id="firebaseui-auth-container"></div>
 
       <hr>
 
