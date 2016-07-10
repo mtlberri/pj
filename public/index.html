@@ -13,7 +13,6 @@
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="jumbotron.css" rel="stylesheet">
 
@@ -30,6 +29,32 @@
       firebase.initializeApp(config);
     </script>
     
+    <!-- FirebaseUI for Web Auth: Installation -->
+    <script src="https://www.gstatic.com/firebasejs/ui/live/0.4/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/live/0.4/firebase-ui-auth.css" />
+    <script>
+            // FirebaseUI config.
+      var uiConfig = {
+        'signInSuccessUrl': '<url-to-redirect-to-on-success>',
+        'signInOptions': [
+          // Leave the lines as is for the providers you want to offer your users.
+          //firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+          //firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+          //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+          //firebase.auth.GithubAuthProvider.PROVIDER_ID,
+          firebase.auth.EmailAuthProvider.PROVIDER_ID
+        ],
+        // Terms of service url.
+        'tosUrl': '<your-tos-url>',
+      };
+
+      // Initialize the FirebaseUI Widget using Firebase.
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+      // The start method will wait until the DOM is loaded.
+      ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
+
+
   </head>
 
   <body>
@@ -97,6 +122,11 @@
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
       </div>
+
+      <!-- The surrounding HTML is left untouched by FirebaseUI.
+               Your app may use that space for branding, controls and other customizations.-->
+          <h1>FirebaseUI</h1>
+          <div id="firebaseui-auth-container"></div>
 
       <hr>
 
