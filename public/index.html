@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
+  <!-- //////////////////////////////////HEADER/////////////////////////////////////// -->
+
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -81,6 +85,8 @@
               }, null, '  ');
             // Push user account details to HTML content
             document.getElementById('account-details').textContent = accountDetails;
+            document.getElementById('userPhoto').src = photoURL;
+
             // Push user account details to Firebase
             firebase.database().ref("users/").push({
               displayName: displayName,
@@ -111,25 +117,9 @@
 
   </head>
 
-  <body>
-  <!-- Facebook SDK for Javascript -->
-  <script>
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '651800564970614',
-        xfbml      : true,
-        version    : 'v2.6'
-      });
-    };
+<!-- //////////////////////////////////BODY/////////////////////////////////////// -->
 
-    (function(d, s, id){
-       var js, fjs = d.getElementsByTagName(s)[0];
-       if (d.getElementById(id)) {return;}
-       js = d.createElement(s); js.id = id;
-       js.src = "//connect.facebook.net/en_US/sdk.js";
-       fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'facebook-jssdk'));
-  </script>
+  <body>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -166,6 +156,8 @@
       <!-- Firebase UI Auth container -->
       <div id="firebaseui-auth-container"></div>
 
+      <img id="userPhoto" src="images/default_user.png">
+      
       <div id="sign-in-status"></div>
       <div id="sign-in"></div>
       <div id="account-details"></div>
@@ -208,6 +200,26 @@
       </footer>
     </div> <!-- /container -->
 
+<!-- //////////////////////////////////SCRIPTS/////////////////////////////////////// -->
+
+  <!-- Facebook SDK for Javascript -->
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '651800564970614',
+        xfbml      : true,
+        version    : 'v2.6'
+      });
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
 
   <script>
     var email_input = document.getElementById("email");
