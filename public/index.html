@@ -35,7 +35,7 @@
     <script>
             // FirebaseUI config.
       var uiConfig = {
-        'signInSuccessUrl': 'https://plateaujuicing.firebaseapp.com/',
+        'signInSuccessUrl': 'http://localhost:5000/',
         'signInOptions': [
           // Leave the lines as is for the providers you want to offer your users.
           firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -69,8 +69,8 @@
           user.getToken().then(function(accessToken) {
             document.getElementById('sign-in-status').textContent = 'Signed in';
             document.getElementById('sign-in').textContent = 'Sign out';
-            var account-details_tmp;
-            document.getElementById('account-details').textContent = JSON.stringify({
+            // Create a JSON with user account details
+            var accountDetails = JSON.stringify({
               displayName: displayName,
               email: email,
               emailVerified: emailVerified,
@@ -78,9 +78,22 @@
               uid: uid,
               accessToken: accessToken,
               providerData: providerData
-            }, null, '  ');
-          });
-        } else {
+              }, null, '  ');
+            // Push user account details to HTML content
+            document.getElementById('account-details').textContent = accountDetails;
+            // Push user account details to Firebase
+            firebase.database().ref("users/").push({
+              displayName: displayName,
+              email: email,
+              emailVerified: emailVerified,
+              photoURL: photoURL,
+              uid: uid,
+              accessToken: accessToken,
+              providerData: providerData
+              });
+          }) 
+        }
+        else {
           // User is signed out.
           document.getElementById('sign-in-status').textContent = 'Signed out';
           document.getElementById('sign-in').textContent = 'Sign in';
