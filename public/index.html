@@ -221,6 +221,7 @@
      }(document, 'script', 'facebook-jssdk'));
   </script>
 
+  <!-- Old fields e-mail / password -->
   <script>
     var email_input = document.getElementById("email");
     var signin_button = document.getElementById("signin_button");
@@ -236,22 +237,30 @@
     });
   </script>
 
+  <!-- Ordering -->
   <script>
-    var order_red_orange = document.getElementById("red_orange_order_button");
+    
+    
 
-    red_orange_order_button.addEventListener("click", function() {
+      var order_red_orange = document.getElementById("red_orange_order_button");
+      red_orange_order_button.addEventListener("click", function() {
 
-      console.log("Red Orange ordered!");
+        if (firebase.auth().currentUser) {
 
-      firebase.database().ref("orders/").push({
-        user: "Dummy user 1",
-        juice_id: "Red Orange",
-        qty: 1,
-        delivery_adress: "2350 Boulvd Saint-Laurent"
+          console.log("Red Orange ordered!");
+          firebase.database().ref("orders/").push({
+            userUid: firebase.auth().currentUser.uid,
+            userDisplayName: firebase.auth().currentUser.displayName,
+            juice_id: "Red Orange",
+            qty: 1,
+            delivery_adress: "2350 Boulvd Saint-Laurent"
+          });
+        
+        }
+
       });
 
-    });
-
+    
   </script>
 
   </body>
