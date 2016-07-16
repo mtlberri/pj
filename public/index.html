@@ -39,7 +39,7 @@
     <script>
             // FirebaseUI config.
       var uiConfig = {
-        'signInSuccessUrl': 'https://plateaujuicing.firebaseapp.com/',
+        'signInSuccessUrl': 'http://localhost:5000/',
         'signInOptions': [
           // Leave the lines as is for the providers you want to offer your users.
           firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -71,8 +71,11 @@
           var uid = user.uid;
           var providerData = user.providerData;
           user.getToken().then(function(accessToken) {
-            document.getElementById('sign-in-status').textContent = 'Signed in';
-            document.getElementById('sign-in').textContent = 'Sign out';
+
+            //Display name in the Nav bar
+            $("#user_name_navbar").text(displayName);
+            $("#sign_in_out").text("Sign out");
+
             // Create a JSON with user account details
             var accountDetails = JSON.stringify({
               displayName: displayName,
@@ -100,8 +103,7 @@
         }
         else {
           // User is signed out.
-          document.getElementById('sign-in-status').textContent = 'Signed out';
-          document.getElementById('sign-in').textContent = 'Sign in';
+
         }
       }, function(error) {
         console.log(error);
@@ -111,7 +113,12 @@
     window.addEventListener('load', function() {
       initApp()
     });
+
+
   </script>
+
+  <!-- jQuery -->
+  <script src="node_modules/jquery/dist/jquery.js"></script>
 
   </head>
 
@@ -131,16 +138,23 @@
           <a class="navbar-brand" href="#">Plateau Juicing</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control" id="email">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control" id="password">
-            </div>
-            <button type="submit" class="btn btn-success" id="signin_button">Sign in</button>
-          </form>
+
+          <div class="navbar-right">
+
+            <span id="user_name_navbar" style="color: #777;">Please Sign in </span>
+            
+            <span style="color: #777;">( </span>
+              <a id="sign_in_out" href="http://localhost:5000/" style="color: #777;" onclick="">Sign in</a>
+            <span style="color: #777;"> )</span>
+            
+            <img id="userPhoto" src="images/default_user.png" alt="User photo" class="img-circle" style="width:40px;height:40px;margin:5px;">
+
+          </div>
+
         </div><!--/.navbar-collapse -->
+
+
+
       </div>
     </nav>
 
@@ -151,59 +165,61 @@
         <p>Delivering amazing Juices of freshly pressed juices of veggetables and fruits.</p>
         <p><a class="btn btn-default" href="#" role="button">Learn more about us &raquo;</a></p>
       </div>
+      
       <!-- Firebase UI Auth container -->
       <div id="firebaseui-auth-container"></div>
 
-      <img id="userPhoto" src="images/default_user.png">
+
       
       <div id="sign-in-status"></div>
-      <div id="sign-in"></div>
+
 
     </div>
 
     <div class="container">
-      <!-- Example row of columns -->
-      <section>
-      <div class="row">
-        <div>
-          <h2>The <i>"Red Orange"</i></h2>
-          <img class="juices_main_page" src="images/red_orange-original.JPG" alt="Red Orange Juice">
-          <p>
-            The <i>"Red Orange"</i> is a perfect mix of <i>Beet</i> and <i>Carrots</i> as main ingredients. It is sweetened by <i>Apple</i> and spiced by <i>Ginger</i>.
-          </p>
-          <p>
-            Profile: Vitamin A, Vitamin C, ...
-          </p>
+
+      <h2>The <i>"Red Orange"</i></h2>
+      <img class="juices_main_page" src="images/red_orange-original.JPG" alt="Red Orange Juice">
+      <p>
+        The <i>"Red Orange"</i> is a perfect mix of <i>Beet</i> and <i>Carrots</i> as main ingredients. It is sweetened by <i>Apple</i> and spiced by <i>Ginger</i>.
+      </p>
+      <p>
+        Profile: Vitamin A, Vitamin C, ...
+      </p>
+    
+      <form id="red_orange_ordering_form">        
         
-          <div style="margin-top:10px">
-            Quantiy:
-            <select class="form-control" style="width:50px" id="red_orange_qty">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-          </div> 
-          <div style="margin-top:10px">
-            Delivery Date &amp Time slot:
-            <input type="datetime" class="form-control" style="width:350px" placeholder="E.g.: Jul 7th between 6PM and 8PM" id="red_orange_Date_Time">
-          </div>  
-          <div style="margin-top:10px">
-            Delivery Address:
-            <input type="text" class="form-control" style="width:350px" placeholder="E.g.: 4704 Rue de la Roche, Appartment#2" id="red_orange_address">
-          </div>            
-          <div style="margin-top:10px">
-            <a class="btn btn-primary btn-lg" href="#" role="button" id="red_orange_order_button">Order! &raquo;</a>
-          </div>
-        </div>
-        </section>
+        <div class="form-group">
+          <label for="red_orange_qty">Quantity</label>
+          <select class="form-control" style="width:50px" id="red_orange_qty">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div> 
+
+        <div class="form-group">
+          <label for="red_orange_Date_Time">Delivery Date &amp Time Slot</label>
+          <input type="datetime" class="form-control" style="width:350px" placeholder="E.g.: Jul 7th between 6PM and 8PM" id="red_orange_Date_Time">
+        </div>  
+
+        <div class="form-group">
+          <label for="red_orange_address">Delivery Address:</label>
+          <input type="text" class="form-control" style="width:350px" placeholder="E.g.: 4704 Rue de la Roche, Appartment#2" id="red_orange_address">
+        </div>  
+
+        <button type="submit" class="btn btn-primary btn-lg">Order! &raquo;</button>
+      
+      </form>
 
       <hr>
 
       <footer>
         <p>&copy; Plateau Juicing, Inc.</p>
       </footer>
+
     </div> <!-- /container -->
 
 <!-- //////////////////////////////////SCRIPTS/////////////////////////////////////// -->
@@ -227,7 +243,7 @@
      }(document, 'script', 'facebook-jssdk'));
   </script>
 
-  <!-- Old fields e-mail / password -->
+  <!-- Old fields e-mail / password 
   <script>
     var email_input = document.getElementById("email");
     var signin_button = document.getElementById("signin_button");
@@ -242,42 +258,56 @@
 
     });
   </script>
+  -->
 
-
-  <!-- Ordering OLD -->
+  <!-- Ordering NEW -->
   <script>
-    
-    
+    var firebaseOrders = firebase.database().ref().child("orders");
 
-      var order_red_orange = document.getElementById("red_orange_order_button");
-      red_orange_order_button.addEventListener("click", function() {
+    var submitOrder = function() {
 
-        if (firebase.auth().currentUser) {
+      console.log("submit order function called!");
 
-          var red_orange_qty = document.getElementById("red_orange_qty").value;
-          var red_orange_Date_Time = document.getElementById("red_orange_Date_Time").value;
-          var red_orange_address = document.getElementById("red_orange_address").value;
+      var qty = $("#red_orange_qty").val();
+      var dateTime = $("#red_orange_Date_Time").val();
+      var address = $("#red_orange_address").val();
 
-          console.log("Red Orange ordered!");
-          console.log("Qty:" + red_orange_qty);
-          console.log("Date and Time:" + red_orange_Date_Time);
-          console.log("Delivery Address:" + red_orange_address);
+      console.log("Red Orange ordered!");
+      console.log("Qty:" + qty);
+      console.log("Date and Time:" + dateTime);
+      console.log("Delivery Address:" + address);
 
-          firebase.database().ref("orders/").push({
-            userUid: firebase.auth().currentUser.uid,
-            userDisplayName: firebase.auth().currentUser.displayName,
-            juice_id: "Red Orange",
-            qty: red_orange_qty,
-            date_time: red_orange_Date_Time,
-            delivery_adress: red_orange_address
-          });
-        
-        }
-
+      firebaseOrders.push({
+        "newMethod": true,
+        "qty": qty,
+        "date_time": dateTime,
+        "delivery_address": address,
+        "juice_id": "Red Orange",
+        "userUid": firebase.auth().currentUser.uid,
+        "userDisplayName": firebase.auth().currentUser.displayName       
       });
 
-    
+    }
+
+    //jQuery: listening event window loaded
+    $(window).on("load", function() {
+
+      console.log("Window loaded!");
+
+      //jQuery listening for Form submittal
+      $("#red_orange_ordering_form").on("submit", function() {
+        console.log("Order Form submitted!");
+        submitOrder();
+        //returning false to prevent the event to bubble and trigger further actions...
+        return false;
+      });
+
+      
+
+    });
+
   </script>
+
 
   </body>
 </html>
