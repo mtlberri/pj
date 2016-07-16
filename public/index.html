@@ -64,7 +64,6 @@
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
           // User is signed in.
-          console.log("User is signed in!");
           var displayName = user.displayName;
           var email = user.email;
           var emailVerified = user.emailVerified;
@@ -155,6 +154,11 @@
       <!-- Firebase UI Auth container -->
       <div id="firebaseui-auth-container"></div>
 
+      <img id="userPhoto" src="images/default_user.png">
+      
+      <div id="sign-in-status"></div>
+      <div id="sign-in"></div>
+
     </div>
 
     <div class="container">
@@ -193,41 +197,9 @@
             <a class="btn btn-primary btn-lg" href="#" role="button" id="red_orange_order_button">Order! &raquo;</a>
           </div>
         </div>
-        </section>        
+        </section>
 
       <hr>
-
-      <div>
-
-      <img id="userPhoto" src="images/default_user.png">
-      <div id="sign-in-status"></div>
-      <div id="sign-in"></div>
-
-        Order(s) from User: 
-        <div>
-          <table class="table table-striped">
-            <tr>
-              <th>Order#</th>
-              <th>Quantity</th>
-              <th>Delivery Date &amp Time Slot</th>
-              <th>Delivery Address</th>
-              <th>Status</th>                            
-              <th>Delete</th>
-            </tr>
-              <td>test1</td>
-              <td>test2</td>
-              <td>test3</td>
-              <td>test4</td>
-              <td>test5</td>
-              <td>test6</td>
-          </table>
-        </div>
-      </div>
-
-      
-
-      <hr>
-
 
       <footer>
         <p>&copy; Plateau Juicing, Inc.</p>
@@ -274,6 +246,9 @@
 
   <!-- Ordering OLD -->
   <script>
+    
+    
+
       var order_red_orange = document.getElementById("red_orange_order_button");
       red_orange_order_button.addEventListener("click", function() {
 
@@ -300,12 +275,8 @@
         }
 
       });
-  </script>
 
-  <!-- Displaing orders -->
-  <script>
-
-
+    
   </script>
 
   </body>
