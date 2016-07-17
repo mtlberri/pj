@@ -75,6 +75,11 @@
             //Display name in the Nav bar
             $("#user_name_navbar").text(displayName);
             $("#sign_in_out").text("Sign out");
+            console.log("User is signed in!");
+
+            //jQuery hiding the Firebase UI Auth when the user is logged in
+            console.log("Hide Firebase UI Auth please!");
+            $("#firebaseui-auth-container").slideUp(1000);  
 
             // Create a JSON with user account details
             var accountDetails = JSON.stringify({
@@ -103,6 +108,10 @@
         }
         else {
           // User is signed out.
+
+          //jQuery showing the Firebase UI Auth when the user is logged in
+          console.log("Show Firebase UI Auth please!");
+          $("#firebaseui-auth-container").slideDown(1000); 
 
         }
       }, function(error) {
@@ -144,7 +153,7 @@
             <span id="user_name_navbar" style="color: #777;">Please Sign in </span>
             
             <span style="color: #777;">( </span>
-              <a id="sign_in_out" href="http://localhost:5000/" style="color: #777;" onclick="">Sign in</a>
+              <a id="sign_in_out" href="http://localhost:5000/" style="color: #777;" onclick="firebase.auth().signOut();"></a>
             <span style="color: #777;"> )</span>
             
             <img id="userPhoto" src="images/default_user.png" alt="User photo" class="img-circle" style="width:40px;height:40px;margin:5px;">
@@ -301,7 +310,7 @@
         //returning false to prevent the event to bubble and trigger further actions...
         return false;
       });
-
+      
       
 
     });
