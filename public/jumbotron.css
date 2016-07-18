@@ -6,6 +6,7 @@ body {
 
 img.juices_main_page {
 	float: right;
+	margin-left: 10px;
 	width:200px; 
 	height:267px;
 }

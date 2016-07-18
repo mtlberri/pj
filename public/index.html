@@ -187,41 +187,82 @@
 
     <div class="container">
 
-      <h2>The <i>"Red Orange"</i></h2>
-      <img class="juices_main_page" src="images/red_orange-original.JPG" alt="Red Orange Juice">
-      <p>
-        The <i>"Red Orange"</i> is a perfect mix of <i>Beet</i> and <i>Carrots</i> as main ingredients. It is sweetened by <i>Apple</i> and spiced by <i>Ginger</i>.
-      </p>
-      <p>
-        Profile: Vitamin A, Vitamin C, ...
-      </p>
-    
-      <form id="red_orange_ordering_form">        
+      <div class="row"> <!-- Juices Div -->
+
+        <div class="col-md-6"> <!-- Red Orange Div -->
+          <h2>The <i>"Red Orange"</i></h2>
+          <img class="juices_main_page img-rounded" src="images/red_orange-original.JPG" alt="Red Orange Juice">
+          <p>
+            The <i>"Red Orange"</i> is a perfect mix of <i>Beet</i> and <i>Carrots</i> as main ingredients. It is sweetened by <i>Apple</i> and spiced by <i>Ginger</i>.
+          </p>
+          <p>
+            Profile: Vitamin A, Vitamin C, ...
+          </p>
         
-        <div class="form-group">
-          <label for="red_orange_qty">Quantity</label>
-          <select class="form-control" style="width:50px" id="red_orange_qty">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div> 
+          <form id="red_orange_ordering_form">        
+            
+            <div class="form-group">
+              <label for="red_orange_qty">Quantity</label>
+              <select class="form-control" style="width:50px" id="red_orange_qty">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div> 
 
-        <div class="form-group">
-          <label for="red_orange_Date_Time">Delivery Date &amp Time Slot</label>
-          <input type="datetime" class="form-control" style="width:350px" placeholder="E.g.: Jul 7th between 6PM and 8PM" id="red_orange_Date_Time">
-        </div>  
+            <div class="form-group">
+              <label for="red_orange_Date_Time">Delivery Date &amp Time Slot</label>
+              <input type="datetime" class="form-control" style="width:300px" placeholder="E.g.: Jul 7th between 6PM and 8PM" id="red_orange_Date_Time">
+            </div>  
 
-        <div class="form-group">
-          <label for="red_orange_address">Delivery Address:</label>
-          <input type="text" class="form-control" style="width:350px" placeholder="E.g.: 4704 Rue de la Roche, Appartment#2" id="red_orange_address">
-        </div>  
+            <div class="form-group">
+              <label for="red_orange_address">Delivery Address:</label>
+              <input type="text" class="form-control" style="width:300px" placeholder="E.g.: 4704 Rue de la Roche, Appartment#2" id="red_orange_address">
+            </div>  
+            <button type="submit" class="btn btn-primary btn-lg">Order! &raquo;</button>
+          </form>
+        </div> <!-- End of Red Orange Div -->
 
-        <button type="submit" class="btn btn-primary btn-lg">Order! &raquo;</button>
-      
-      </form>
+        <div class="col-md-6"> <!-- Green Energy Div -->
+          <h2>The <i>"Green Energy"</i></h2>
+          <img class="juices_main_page img-rounded" src="images/green_energy-original.JPG" alt="Green Energy Juice">
+          <p>
+            The <i>"Green Energy"</i> is a perfect mix of <i>Kale</i> and <i>Spinach</i> as main ingredients. It is sweetened by <i>Apple</i> and spiced by <i>Ginger</i>.
+          </p>
+          <p>
+            Profile: Vitamin A, Vitamin C, ...
+          </p>
+        
+          <form id="green_energy_ordering_form">        
+            
+            <div class="form-group">
+              <label for="green_energy_qty">Quantity</label>
+              <select class="form-control" style="width:50px" id="green_energy_qty">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div> 
+
+            <div class="form-group">
+              <label for="green_energy_Date_Time">Delivery Date &amp Time Slot</label>
+              <input type="datetime" class="form-control" style="width:300px" placeholder="E.g.: Jul 7th between 6PM and 8PM" id="green_energy_Date_Time">
+            </div>  
+
+            <div class="form-group">
+              <label for="green_energy_address">Delivery Address:</label>
+              <input type="text" class="form-control" style="width:300px" placeholder="E.g.: 4704 Rue de la Roche, Appartment#2" id="green_energy_address">
+            </div>  
+            <button type="submit" class="btn btn-primary btn-lg">Order! &raquo;</button>
+          </form>
+        </div> <!-- End of Green Energy Div -->
+
+
+      </div> <!-- End of Juices Div -->
 
       <hr>
 
@@ -234,12 +275,14 @@
           <th>Quantity</th>
           <th>Delivery Date &amp Time Slot</th>
           <th>Delivery Address</th>
+          <th>Actions</th>
         </tr>
         <tr>
           <td id="tableJuiceId"></td>
           <td id="tableQty"></td>
           <td id="tableDateTime"></td>
           <td id="tableAddress"></td>
+          <td><button type="button" class="btn btn-default">Cancel Order</button></td>
         </tr>
       </table>
 
