@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app>
   <head>
 
   <!-- //////////////////////////////////HEADER/////////////////////////////////////// -->
@@ -23,7 +23,7 @@
     <!-- Firebase configuration -->
     <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
     <script>
-      // Initialize Firebase
+      // Initialize Firebase and configure it
       var config = {
         apiKey: "AIzaSyCleCXI68tsiwMnY8-VKDKBaF3NscCc0aU",
         authDomain: "plateaujuicing.firebaseapp.com",
@@ -300,16 +300,28 @@
       <!-- AngularJS Table of Orders -->
       <h1> Angularfire Table of Orders:</h1>
 
+      <div>
+        <label>Name:</label>
+        <input type="text" ng-model="yourName" placeholder="Enter a name here">
+        <hr>
+        <h1>Hello {{yourName}}!</h1>
+      </div>
+
+      
+
 
       <hr>
       <footer>
         <p>&copy; Plateau Juicing, Inc.</p>
       </footer>
-
     </div> <!-- /container -->
-
 <!-- //////////////////////////////////SCRIPTS/////////////////////////////////////// -->
+  <script>
+    //AngularFire
 
+
+
+  </script>
 
 
   <!-- Facebook SDK for Javascript -->
