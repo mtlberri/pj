@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="pjApp">
   <head>
 
   <!-- //////////////////////////////////HEADER/////////////////////////////////////// -->
@@ -133,7 +133,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 
   <!-- AngularFire -->
-  <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+  <script src="https://cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js"></script>
 
   <!-- PJ App Javascript -->
   <script src="pj.js"></script>
@@ -142,7 +142,7 @@
 
 <!-- //////////////////////////////////BODY/////////////////////////////////////// -->
 
-  <body>
+  <body ng-controller="orderListController">
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -301,13 +301,18 @@
       <h1> Angularfire Table of Orders:</h1>
 
       <div>
-        <label>Name:</label>
+        <label>(Angular functional test) Name:</label>
         <input type="text" ng-model="yourName" placeholder="Enter a name here">
-        <hr>
         <h1>Hello {{yourName}}!</h1>
-      </div>
 
-      
+        <h2>Test of AngularFire binding success: </h2>
+
+        <ul>
+          <li>Below should be the message of success</li>
+          <li ng-repeat="message in messages">{{ message.text }}</li>
+        </ul>
+
+      </div>
 
 
       <hr>
@@ -316,12 +321,6 @@
       </footer>
     </div> <!-- /container -->
 <!-- //////////////////////////////////SCRIPTS/////////////////////////////////////// -->
-  <script>
-    //AngularFire
-
-
-
-  </script>
 
 
   <!-- Facebook SDK for Javascript -->
@@ -386,6 +385,9 @@
         "userUid": firebase.auth().currentUser.uid,
         "userDisplayName": firebase.auth().currentUser.displayName       
       });
+
+      //test section for Angular (TO BE DELETED AFTER)
+      firebase.database().ref().child("messages").push({"text": "Success AngularFire!"});
 
     }
 
