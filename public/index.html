@@ -301,24 +301,13 @@
       <h1> Angularfire Table of Orders:</h1>
 
       <div>
-        <label>(Angular functional test) Name:</label>
-        <input type="text" ng-model="yourName" placeholder="Enter a name here">
-        <h1>Hello {{yourName}}!</h1>
-
-        <h2>Test of AngularFire binding success: </h2>
-
-        <!-- 
         <ul>
-          <li>Below should be the message of success</li>
-          <li ng-repeat="message in messages">{{ message.text }}</li>
+          <li ng-repeat="order in orders">{{ order.juice_id }}: {{ order.qty }}</li>
         </ul>
-        -->
 
-        And here comes the Orders: <br>
         {{ orders | json }}
 
       </div>
-
 
       <hr>
       <footer>
