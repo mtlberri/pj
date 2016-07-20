@@ -1,8 +1,10 @@
 //AngularFire - Synchronized Array for Oders
 var app = angular.module("pjApp", ["firebase"]);
-app.controller("orderListController", function($scope, $firebaseArray) {
-  var ref = firebase.database().ref().child("messages");
-  // create a synchronzided array
-  $scope.messages = $firebaseArray(ref);
-
-});
+//Inject firebaseObject into the controller
+app.controller("orderListController", ["$scope", "$firebaseObject", 
+	function($scope, $firebaseObject) {
+	  var ref = firebase.database().ref().child("orders");
+	  //Download firebase into a local object
+	  $scope.orders = $firebaseObject(ref);
+	}
+]);
