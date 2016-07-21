@@ -269,44 +269,32 @@
             <button type="submit" class="btn btn-primary btn-lg">Order! &raquo;</button>
           </form>
         </div> <!-- End of Green Energy Div -->
-
-
       </div> <!-- End of Juices Div -->
 
       <hr>
-
-      <!-- Table of Orders -->
-      <h1>Your Orders:</h1>
-
-      <table class="table">
-        <tr>
-          <th>Juice</th>
-          <th>Quantity</th>
-          <th>Delivery Date &amp Time Slot</th>
-          <th>Delivery Address</th>
-          <th>Actions</th>
-        </tr>
-        <tr>
-          <td id="tableJuiceId"></td>
-          <td id="tableQty"></td>
-          <td id="tableDateTime"></td>
-          <td id="tableAddress"></td>
-          <td><button type="button" class="btn btn-default">Cancel Order</button></td>
-        </tr>
-      </table>
-
-
-
       <!-- AngularJS Table of Orders -->
       <h1> Angularfire Table of Orders:</h1>
-
       <div>
-        <ul>
-          <li ng-repeat="order in orders">{{ order.juice_id }}: {{ order.qty }}</li>
-        </ul>
-
-        {{ orders | json }}
-
+        <table class="table">
+          <tr>
+            <th>Order #</th>
+            <th>Juice</th>
+            <th>Quantity</th>
+            <th>Delivery Date &amp Time Slot</th>
+            <th>Delivery Address</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+          <tr ng-repeat="order in orders">
+            <td>?</td>
+            <td>{{ order.juice_id }}</td>
+            <td>{{ order.qty }}</td>
+            <td>{{ order.date_time }}</td>
+            <td>{{ order.delivery_address }}</td>
+            <td>Created</td>
+            <td><button type="button" class="btn btn-default">Cancel Order</button></td>
+          </tr>          
+        </table>
       </div>
 
       <hr>
@@ -335,23 +323,6 @@
        fjs.parentNode.insertBefore(js, fjs);
      }(document, 'script', 'facebook-jssdk'));
   </script>
-
-  <!-- Old fields e-mail / password 
-  <script>
-    var email_input = document.getElementById("email");
-    var signin_button = document.getElementById("signin_button");
-    
-    signin_button.addEventListener("click", function() {
-
-      console.log(email_input.value); 
-
-      firebase.database().ref("users/").push({
-        email: email_input.value
-      });
-
-    });
-  </script>
-  -->
 
   <!-- submitOrder function and jQuery listener when Form submitted -->
   <script>
@@ -398,18 +369,6 @@
         return false;
       });
       
-    });
-
-    // Displaying orders in the table
-
-    firebaseOrders.limitToLast(1).on("child_added", function(childSnapshot) {
-      //retrieve the last order
-      var lastOrder = childSnapshot.val();
-      // fill the table based on last order - using jQuery
-      $("#tableJuiceId").html(lastOrder.juice_id);
-      $("#tableQty").html(lastOrder.qty);
-      $("#tableDateTime").html(lastOrder.date_time);
-      $("#tableAddress").html(lastOrder.delivery_address);
     });
 
   </script>
