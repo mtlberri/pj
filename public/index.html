@@ -286,15 +286,19 @@
             <th>Actions</th>
           </tr>
           <tr ng-repeat="order in orders">
-            <td>?</td>
+            <td>{{ order.$id }}</td>
             <td>{{ order.juice_id }}</td>
             <td>{{ order.qty }}</td>
             <td>{{ order.date_time }}</td>
             <td>{{ order.delivery_address }}</td>
             <td>Created</td>
-            <td><button type="button" class="btn btn-default">Cancel Order</button></td>
+            <td><button type="button" class="btn btn-default" ng-click="removeOrder(order)">Cancel Order</button></td>
           </tr>          
         </table>
+
+        <h2>All Orders:</h2>
+        {{ orders }}
+
       </div>
 
       <hr>

@@ -5,10 +5,17 @@ var app = angular.module("pjApp", ["firebase"]);
 
 
 //Inject firebaseObject into the controller
-app.controller("orderListController", ["$scope", "$firebaseObject", 
-	function($scope, $firebaseObject) {
+app.controller("orderListController", ["$scope", "$firebaseArray", 
+	function($scope, $firebaseArray) {
 	  var refOrders = firebase.database().ref().child("orders");
 	  //Download firebase into a local object
-	  $scope.orders = $firebaseObject(refOrders);
+	  $scope.orders = $firebaseArray(refOrders);
+
+	  //Method to Delete an Order
+	  $scope.removeOrder = function(order) {
+	  	console.log("Cancel button pressed!")
+	  	$scope.orders.$remove(order);
+	  }
+
 	}
 ]);
