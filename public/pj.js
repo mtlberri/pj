@@ -14,15 +14,20 @@ app.controller("orderListController", ["$scope", "$firebaseArray",
 	  //Method to add a new Order, called by the form ng-submit
 	  $scope.addOrder = function(){
 	  	$scope.orders.$add({
-	        "orderNumber": ($scope.orders.length +1),
+	        "orderNumber": $scope.lastOrderNumber() + 1,
 	        "juice_id": $scope.formJuice,	        
 	        "qty": $scope.formQty,
 	        "date_time": $scope.formDateTime,
 	        "delivery_address": $scope.formAddress,
-	        "status": "created",
+	        "status": "ordered",
 	        "userUid": firebase.auth().currentUser.uid,
 	        "userDisplayName": firebase.auth().currentUser.displayName       
 	  	});
+	  }
+
+	  //Method to retrieve the last order number from list of orders
+	  $scope.lastOrderNumber = function() {
+	  	return $scope.orders[$scope.orders.length - 1].orderNumber;
 	  }
 
 	  //Method to change order status

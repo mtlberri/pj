@@ -266,7 +266,7 @@
             <td>{{ order.qty }}</td>
             <td>{{ order.date_time }}</td>
             <td>{{ order.delivery_address }}</td>
-            <td>{{ order.status }}</td>
+            <td><span class="label label-primary">{{ order.status }}<span></td>
             <td>
               <button type="button" class="btn btn-default" ng-click="changeOrderStatus(order,'cancelled')">Cancel
               </button>
