@@ -11,23 +11,32 @@ app.controller("orderListController", ["$scope", "$firebaseArray",
 	  //Download firebase into a local object
 	  $scope.orders = $firebaseArray(refOrders);
 
-	  //Method to Delete an Order
-	  $scope.removeOrder = function(order) {
-	  	console.log("Cancel button pressed!")
-	  	$scope.orders.$remove(order);
-	  }
-
 	  //Method to add a new Order, called by the form ng-submit
 	  $scope.addOrder = function(){
 	  	$scope.orders.$add({
+	        "orderNumber": ($scope.orders.length +1),
 	        "juice_id": $scope.formJuice,	        
 	        "qty": $scope.formQty,
 	        "date_time": $scope.formDateTime,
 	        "delivery_address": $scope.formAddress,
+	        "status": "created",
 	        "userUid": firebase.auth().currentUser.uid,
 	        "userDisplayName": firebase.auth().currentUser.displayName       
 	  	});
 	  }
+
+	  //Method to change order status
+	  $scope.changeOrderStatus = function(order,newStatus) {
+	  	order.status = newStatus;
+	  	$scope.orders.$save(order);
+	  	console.log("order status changed!");
+	  };
+
+	  //Method to Delete an Order (NOT TO BE USED!!!)
+	  $scope.removeOrder = function(order) {
+	  	console.log("Cancel button pressed!")
+	  	$scope.orders.$remove(order);
+	  };
 
 	}
 ]);
