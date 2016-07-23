@@ -20,10 +20,10 @@ app.controller("orderListController", ["$scope", "$firebaseArray",
 	  //Method to add a new Order, called by the form ng-submit
 	  $scope.addOrder = function(){
 	  	$scope.orders.$add({
+	        "juice_id": $scope.formJuice,	        
 	        "qty": $scope.formQty,
 	        "date_time": $scope.formDateTime,
 	        "delivery_address": $scope.formAddress,
-	        "juice_id": "Red Orange",
 	        "userUid": firebase.auth().currentUser.uid,
 	        "userDisplayName": firebase.auth().currentUser.displayName       
 	  	});

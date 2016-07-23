@@ -122,19 +122,14 @@
     window.addEventListener('load', function() {
       initApp()
     });
-
-
   </script>
 
   <!-- jQuery -->
   <script src="node_modules/jquery/dist/jquery.js"></script>
-
   <!-- AngularJS -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-
   <!-- AngularFire -->
   <script src="https://cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js"></script>
-
   <!-- PJ App Javascript -->
   <script src="pj.js"></script>
 
@@ -218,6 +213,14 @@
       <h1>AngularFire Order Form</h1>
       <div ng-controller="orderListController">
         <form ng-submit="addOrder()">
+
+          <div class="form-group">
+            <label for="formJuice">Juice</label>
+            <select class="form-control" style="width:150px" id="formJuice" ng-model="formJuice">
+              <option>Red Orange</option>
+              <option>Green Energy</option>
+            </select>
+          </div> 
 
           <div class="form-group">
             <label for="formQty">Quantity</label>
