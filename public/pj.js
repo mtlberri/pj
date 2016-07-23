@@ -17,5 +17,17 @@ app.controller("orderListController", ["$scope", "$firebaseArray",
 	  	$scope.orders.$remove(order);
 	  }
 
+	  //Method to add a new Order, called by the form ng-submit
+	  $scope.addOrder = function(){
+	  	$scope.orders.$add({
+	        "qty": $scope.formQty,
+	        "date_time": $scope.formDateTime,
+	        "delivery_address": $scope.formAddress,
+	        "juice_id": "Red Orange",
+	        "userUid": firebase.auth().currentUser.uid,
+	        "userDisplayName": firebase.auth().currentUser.displayName       
+	  	});
+	  }
+
 	}
 ]);

@@ -170,9 +170,7 @@
           </div>
 
         </div><!--/.navbar-collapse -->
-
-
-
+        
       </div>
     </nav>
 
@@ -182,16 +180,9 @@
         <h1>Local, Organic Juices <br>Delivered to Your Door</h1>
         <p>Delivering amazing Juices of freshly pressed juices of veggetables and fruits.</p>
         <p><a class="btn btn-default" href="#" role="button">Learn more about us &raquo;</a></p>
-      </div>
-      
+      </div>    
       <!-- Firebase UI Auth container -->
       <div id="firebaseui-auth-container"></div>
-
-
-      
-      <div id="sign-in-status"></div>
-
-
     </div>
 
     <div class="container">
@@ -207,31 +198,6 @@
           <p>
             Profile: Vitamin A, Vitamin C, ...
           </p>
-        
-          <form id="red_orange_ordering_form">        
-            
-            <div class="form-group">
-              <label for="red_orange_qty">Quantity</label>
-              <select class="form-control" style="width:50px" id="red_orange_qty">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-            </div> 
-
-            <div class="form-group">
-              <label for="red_orange_Date_Time">Delivery Date &amp Time Slot</label>
-              <input type="datetime" class="form-control" style="width:300px" placeholder="E.g.: Jul 7th between 6PM and 8PM" id="red_orange_Date_Time">
-            </div>  
-
-            <div class="form-group">
-              <label for="red_orange_address">Delivery Address:</label>
-              <input type="text" class="form-control" style="width:300px" placeholder="E.g.: 4704 Rue de la Roche, Appartment#2" id="red_orange_address">
-            </div>  
-            <button type="submit" class="btn btn-primary btn-lg">Order! &raquo;</button>
-          </form>
         </div> <!-- End of Red Orange Div -->
 
         <div class="col-md-6"> <!-- Green Energy Div -->
@@ -243,43 +209,19 @@
           <p>
             Profile: Vitamin A, Vitamin C, ...
           </p>
-        
-          <form id="green_energy_ordering_form">        
-            
-            <div class="form-group">
-              <label for="green_energy_qty">Quantity</label>
-              <select class="form-control" style="width:50px" id="green_energy_qty">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-            </div> 
-
-            <div class="form-group">
-              <label for="green_energy_Date_Time">Delivery Date &amp Time Slot</label>
-              <input type="datetime" class="form-control" style="width:300px" placeholder="E.g.: Jul 7th between 6PM and 8PM" id="green_energy_Date_Time">
-            </div>  
-
-            <div class="form-group">
-              <label for="green_energy_address">Delivery Address:</label>
-              <input type="text" class="form-control" style="width:300px" placeholder="E.g.: 4704 Rue de la Roche, Appartment#2" id="green_energy_address">
-            </div>  
-            <button type="submit" class="btn btn-primary btn-lg">Order! &raquo;</button>
-          </form>
         </div> <!-- End of Green Energy Div -->
+
       </div> <!-- End of Juices Div -->
 
       <hr>
       <!-- AngularJS Order Form -->
       <h1>AngularFire Order Form</h1>
       <div ng-controller="orderListController">
-        <form>
+        <form ng-submit="addOrder()">
 
           <div class="form-group">
-            <label for="green_energy_qty">Quantity</label>
-            <select class="form-control" style="width:50px" id="green_energy_qty">
+            <label for="formQty">Quantity</label>
+            <select class="form-control" style="width:50px" id="formQty" ng-model="formQty">
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -289,18 +231,17 @@
           </div> 
 
           <div class="form-group">
-            <label for="green_energy_Date_Time">Delivery Date &amp Time Slot</label>
-            <input type="datetime" class="form-control" style="width:300px" placeholder="E.g.: Jul 7th between 6PM and 8PM" id="green_energy_Date_Time">
+            <label for="formDateTime">Delivery Date &amp Time Slot</label>
+            <input type="datetime" class="form-control" style="width:300px" placeholder="E.g.: Jul 7th between 6PM and 8PM" id="formDateTime" ng-model="formDateTime">
           </div>  
 
           <div class="form-group">
-            <label for="green_energy_address">Delivery Address:</label>
-            <input type="text" class="form-control" style="width:300px" placeholder="E.g.: 4704 Rue de la Roche, Appartment#2" id="green_energy_address">
-          </div>  
-        
+            <label for="formAddress">Delivery Address:</label>
+            <input type="text" class="form-control" style="width:300px" placeholder="E.g.: 4704 Rue de la Roche, Appartment#2" id="formAddress" ng-model="formAddress">
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg">Order! &raquo;</button>   
         </form>
       </div>
-      
 
       <hr>
       <!-- AngularJS Table of Orders -->
@@ -357,55 +298,6 @@
        js.src = "//connect.facebook.net/en_US/sdk.js";
        fjs.parentNode.insertBefore(js, fjs);
      }(document, 'script', 'facebook-jssdk'));
-  </script>
-
-  <!-- submitOrder function and jQuery listener when Form submitted -->
-  <script>
-    var firebaseOrders = firebase.database().ref().child("orders");
-
-    var submitOrder = function() {
-
-      console.log("submit order function called!");
-
-      var qty = $("#red_orange_qty").val();
-      var dateTime = $("#red_orange_Date_Time").val();
-      var address = $("#red_orange_address").val();
-
-      console.log("Red Orange ordered!");
-      console.log("Qty:" + qty);
-      console.log("Date and Time:" + dateTime);
-      console.log("Delivery Address:" + address);
-
-      firebaseOrders.push({
-        "newMethod": true,
-        "qty": qty,
-        "date_time": dateTime,
-        "delivery_address": address,
-        "juice_id": "Red Orange",
-        "userUid": firebase.auth().currentUser.uid,
-        "userDisplayName": firebase.auth().currentUser.displayName       
-      });
-
-      //test section for Angular (TO BE DELETED AFTER)
-      firebase.database().ref().child("messages").push({"text": "Success AngularFire!"});
-
-    }
-
-    //jQuery code: listening event window loaded
-    $(document).ready(function() {
-
-      console.log("Window loaded!");
-
-      //jQuery listening for Form submittal
-      $("#red_orange_ordering_form").on("submit", function() {
-        console.log("Order Form submitted!");
-        submitOrder();
-        //returning false to prevent the event to bubble and trigger further actions...
-        return false;
-      });
-      
-    });
-
   </script>
 
 
