@@ -5,7 +5,7 @@ var app = angular.module("pjApp", ["firebase"]);
 
 
 //Inject firebaseObject into the controller
-app.controller("orderListController", ["$scope", "$firebaseArray", 
+app.controller("OrderListController", ["$scope", "$firebaseArray", 
 	function($scope, $firebaseArray) {
 
 	//Firebase Array on orders

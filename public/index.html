@@ -37,7 +37,7 @@
     <script src="https://www.gstatic.com/firebasejs/ui/live/0.4/firebase-ui-auth.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/live/0.4/firebase-ui-auth.css" />
     <script>
-            // FirebaseUI config.
+      // FirebaseUI config.
       var uiConfig = {
         'signInSuccessUrl': 'http://localhost:5000/',
         'signInOptions': [
@@ -58,9 +58,8 @@
       ui.start('#firebaseui-auth-container', uiConfig);
     </script>
 
-    <!-- FirebaseUI for Web Auth: Tracking Auth state -->
-    <script type="text/javascript">
-
+    <script>
+    // Auth status management
     initApp = function() {
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
@@ -123,13 +122,15 @@
   <!-- AngularFire -->
   <script src="https://cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js"></script>
   <!-- PJ App Javascript -->
-  <script src="pj.js"></script>
+  <script src="app/controllers/OrderListController.js"></script>
+  <!-- Main JavaScript file -->
+  <script src="js/mainJavaScript.js"></script>
 
   </head>
 
 <!-- //////////////////////////////////BODY/////////////////////////////////////// -->
 
-  <body ng-controller="orderListController">
+  <body ng-controller="OrderListController">
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -203,7 +204,7 @@
       <hr>
       <!-- AngularJS Order Form -->
       <h1>AngularFire Order Form</h1>
-      <div ng-controller="orderListController">
+      <div ng-controller="OrderListController">
         <form ng-submit="addOrder()">
 
           <div class="form-group">
@@ -276,29 +277,5 @@
         <p>&copy; Plateau Juicing, Inc.</p>
       </footer>
     </div> <!-- /container -->
-<!-- //////////////////////////////////SCRIPTS/////////////////////////////////////// -->
-
-
-  <!-- Facebook SDK for Javascript -->
-  <script>
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '651800564970614',
-        xfbml      : true,
-        version    : 'v2.6'
-      });
-    };
-
-    (function(d, s, id){
-       var js, fjs = d.getElementsByTagName(s)[0];
-       if (d.getElementById(id)) {return;}
-       js = d.createElement(s); js.id = id;
-       js.src = "//connect.facebook.net/en_US/sdk.js";
-       fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'facebook-jssdk'));
-  </script>
-
-
-
   </body>
 </html>
