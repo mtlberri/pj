@@ -43,6 +43,8 @@ app.controller("orderListController", ["$scope", "$firebaseArray",
 
 	}
 
+	//test
+
 	//Method to retrieve the last order number from list of orders
 	$scope.lastOrderNumber = function() {
 		var result = 0;
