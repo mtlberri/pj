@@ -11,16 +11,6 @@ app.controller("orderListController", ["$scope", "$firebaseArray",
 	//Firebase Array on orders
 	var refOrders = firebase.database().ref().child("orders");
 	$scope.orders = $firebaseArray(refOrders);
-	
-	//Firebase Array on <userUid>/userOrders/ part of the tree
-	firebase.auth().onAuthStateChanged(function(user) {
-		if (user) {
-			var refUserOrders = firebase.database().ref().child("users/" 
-				+ firebase.auth().currentUser.uid + "/userOrders");
-			console.log("Ref to user portion of the tree created!");
-			$scope.userOrders = $firebaseArray(refUserOrders);
-		}
-	});
 
 	//Method to add a new Order, called by the form ng-submit
 	$scope.addOrder = function(){
@@ -34,12 +24,14 @@ app.controller("orderListController", ["$scope", "$firebaseArray",
 	    "status": "ordered",
 	    "userUid": firebase.auth().currentUser.uid,
 	    "userDisplayName": firebase.auth().currentUser.displayName       
-		});
+		}).then(function(ref) {
 
-		//Index the order under the <userUid>/userOrders/ part of the tree
-		$scope.userOrders.$add({
-			"test": true
-		});
+			//Index the order under the users/<userUid>/userOrders/ part of the tree
+			var refUserOrders = firebase.database().ref().child("users/" 
+				+ firebase.auth().currentUser.uid + "/userOrders/" + ref.key).set(true);
+
+			console.log("Index " + ref.key + " created under user orders!");
+			});
 
 	}
 
