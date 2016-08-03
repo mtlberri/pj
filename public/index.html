@@ -82,28 +82,18 @@
             console.log("Hide Firebase UI Auth please!");
             $("#firebaseui-auth-container").slideUp(1000);  
 
-            // Create a JSON with user account details
-            var accountDetails = JSON.stringify({
-              displayName: displayName,
-              email: email,
-              emailVerified: emailVerified,
-              photoURL: photoURL,
-              uid: uid,
-              accessToken: accessToken,
-              providerData: providerData
-              }, null, '  ');
             // Push user account details to HTML content
             document.getElementById('userPhoto').src = photoURL;
 
             // Push user account details to Firebase
-            firebase.database().ref("users/").push({
-              displayName: displayName,
-              email: email,
-              emailVerified: emailVerified,
-              photoURL: photoURL,
-              uid: uid,
-              accessToken: accessToken,
-              providerData: providerData
+            firebase.database().ref("users/" + uid + "/userDetails/").set({
+              "displayName": displayName,
+              "email": email,
+              "emailVerified": emailVerified,
+              "photoURL": photoURL,
+              "uid": uid,
+              "accessToken": accessToken,
+              "providerData": providerData
               });
           }) 
         }
