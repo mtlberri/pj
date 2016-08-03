@@ -11,6 +11,18 @@ app.controller("OrderListController", ["$scope", "$firebaseArray",
 	//Firebase Array on orders
 	var refOrders = firebase.database().ref().child("orders");
 	$scope.orders = $firebaseArray(refOrders);
+	
+	//Observer on the Auth object to set $scope variable uid
+	$scope.uid = null;
+	firebase.auth().onAuthStateChanged(function(user) {
+		if (user) {
+			$scope.uid = user.uid;
+			console.log("$scope variable uid set to " + $scope.uid);
+		} else {
+			$scope.uid = null;
+			console.log("$scope variable uid set to null");
+		}
+	});
 
 	//Method to add a new Order, called by the form ng-submit
 	$scope.addOrder = function(){
@@ -35,8 +47,6 @@ app.controller("OrderListController", ["$scope", "$firebaseArray",
 
 	}
 
-	//test
-
 	//Method to retrieve the last order number from list of orders
 	$scope.lastOrderNumber = function() {
 		var result = 0;
@@ -54,10 +64,11 @@ app.controller("OrderListController", ["$scope", "$firebaseArray",
 	};
 
 	//Method to Delete an Order (NOT TO BE USED!!!)
+	/*
 	$scope.removeOrder = function(order) {
 		console.log("Cancel button pressed!")
 		$scope.orders.$remove(order);
 	};
-
+	*/
 	}
 ]);

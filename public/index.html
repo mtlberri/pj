@@ -253,7 +253,7 @@
             <th>Status</th>
             <th>Actions</th>
           </tr>
-          <tr ng-repeat="order in orders">
+          <tr ng-repeat="order in orders | filter : uid">
             <td>{{ order.orderNumber }}</td>
             <td>{{ order.juice_id }}</td>
             <td>{{ order.qty }}</td>
