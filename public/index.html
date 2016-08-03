@@ -60,10 +60,11 @@
 
     <!-- FirebaseUI for Web Auth: Tracking Auth state -->
     <script type="text/javascript">
+
     initApp = function() {
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-          // User is signed in.
+
           var displayName = user.displayName;
           var email = user.email;
           var emailVerified = user.emailVerified;
@@ -108,9 +109,10 @@
         }
         else {
           // User is signed out.
+          console.log("User is signed out!");
+          console.log("Show Firebase UI Auth please!");
 
           //jQuery showing the Firebase UI Auth when the user is logged in
-          console.log("Show Firebase UI Auth please!");
           $("#firebaseui-auth-container").slideDown(1000); 
 
         }
