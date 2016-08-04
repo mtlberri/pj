@@ -84,7 +84,7 @@
             // Push user account details to HTML content
             document.getElementById('userPhoto').src = photoURL;
 
-            // Push user account details to Firebase
+            // Set user account details to Firebase
             firebase.database().ref("users/" + uid + "/userDetails/").set({
               "displayName": displayName,
               "email": email,
@@ -253,7 +253,7 @@
             <th>Status</th>
             <th>Actions</th>
           </tr>
-          <tr ng-repeat="order in orders | filter : uid">
+          <tr ng-repeat="order in orders | filter : tableFilterFunction">
             <td>{{ order.orderNumber }}</td>
             <td>{{ order.juice_id }}</td>
             <td>{{ order.qty }}</td>
@@ -261,7 +261,7 @@
             <td>{{ order.delivery_address }}</td>
             <td><span class="label label-primary">{{ order.status }}<span></td>
             <td>
-              <button type="button" class="btn btn-default" ng-click="changeOrderStatus(order,'cancelled')">Cancel
+              <button type="button" class="btn btn-default" ng-click="changeOrderStatus(order,'CANCELLED')">Cancel
               </button>
             </td>
           </tr>          

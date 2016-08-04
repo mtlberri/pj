@@ -33,7 +33,7 @@ app.controller("OrderListController", ["$scope", "$firebaseArray",
 	    "qty": $scope.formQty,
 	    "date_time": $scope.formDateTime,
 	    "delivery_address": $scope.formAddress,
-	    "status": "ordered",
+	    "status": "ORDERED",
 	    "userUid": firebase.auth().currentUser.uid,
 	    "userDisplayName": firebase.auth().currentUser.displayName       
 		}).then(function(ref) {
@@ -62,6 +62,17 @@ app.controller("OrderListController", ["$scope", "$firebaseArray",
 		$scope.orders.$save(order);
 		console.log("order status changed!");
 	};
+
+	//Method to filter orders in table (depending on order status, ...)
+	$scope.tableFilterFunction = function(value, index, array) {
+		var result;
+		if (value.status != "ARCHIVED") {
+			result = true;
+		} else {
+			result = false;
+		}
+		return result;
+	};	
 
 	//Method to Delete an Order (NOT TO BE USED!!!)
 	/*
