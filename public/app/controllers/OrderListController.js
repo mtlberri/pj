@@ -34,6 +34,7 @@ app.controller("OrderListController", ["$scope", "$firebaseArray",
 	    "date_time": $scope.formDateTime,
 	    "delivery_address": $scope.formAddress,
 	    "status": "ORDERED",
+	    "paid": false,
 	    "userUid": firebase.auth().currentUser.uid,
 	    "userDisplayName": firebase.auth().currentUser.displayName       
 		}).then(function(ref) {
