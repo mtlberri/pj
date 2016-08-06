@@ -13,7 +13,7 @@
     <meta name="author" content="">
     <link rel="icon" href="images/favicon.ico">
 
-    <title>PJ</title>
+    <title>MTL Juicing</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -125,6 +125,8 @@
   <script src="app/controllers/OrderListController.js"></script>
   <!-- Main JavaScript file -->
   <script src="js/mainJavaScript.js"></script>
+  <!-- IG Embed -->
+  <script async defer src="//platform.instagram.com/en_US/embeds.js"></script>
 
   </head>
 
@@ -141,7 +143,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Plateau Juicing</a>
+          <a class="navbar-brand" href="#">MTL Juicing</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
 
@@ -165,9 +167,11 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1>Local, Organic Juices <br>Delivered to Your Door</h1>
-        <p>Delivering amazing Juices of freshly pressed juices of veggetables and fruits.</p>
-        <p><a class="btn btn-default" href="#" role="button">Learn more about us &raquo;</a></p>
+        <h1>Local Juices <br>Delivered to Your Door</h1>
+        <p>Delivering amazing Juices of freshly pressed veggetables and fruits.</p>
+
+        <p><a class="btn btn-default" href="https://www.instagram.com/mtljuicing/?hl=en" target="_blank" role="button">Learn more about me, visit my <i>@mtljuicing</i> Instagram <img src="images/Instagram-v051916_200.png" style="width:20px;height:20px"> &raquo;</a></p>
+
       </div>    
       <!-- Firebase UI Auth container -->
       <div id="firebaseui-auth-container"></div>
@@ -203,7 +207,7 @@
 
       <hr>
       <!-- AngularJS Order Form -->
-      <h1>AngularFire Order Form</h1>
+      <h2>Make an Order:</h2>
       <div ng-controller="OrderListController">
         <form ng-submit="addOrder()">
 
@@ -241,7 +245,7 @@
 
       <hr>
       <!-- AngularJS Table of Orders -->
-      <h1>Orders:</h1>
+      <h2>Your Orders:</h2>
       <div>
         <table class="table">
           <tr>
@@ -273,10 +277,23 @@
           </tr>          
         </table>
 
-        <h2>All Orders:</h2>
-        {{ orders }}
+      </div>
+
+      <hr>
+      <h2>Connect with me:</h2>
+
+      <div class="Connect_Container">
+
+        <p><a class="btn btn-default" href="mailto:mtljuicing@gmail.com" role="button">E-mail me at <i>mtljuicing@gmail.com</i> <img src="images/logo_gmail_32px.png" style="width:20px;height:20px"> &raquo;</a></p>
+
+        <p><a class="btn btn-default" href="https://www.instagram.com/mtljuicing/?hl=en" target="_blank" role="button">Connect with me <i>@mtljuicing</i> on Instagram <img src="images/Instagram-v051916_200.png" style="width:20px;height:20px"> &raquo;</a></p>
+
+        <blockquote class="instagram-media" data-instgrm-version="7" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:658px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:8px;"> <div style=" background:#F8F8F8; line-height:0; margin-top:40px; padding:50.0% 0; text-align:center; width:100%;"> <div style=" background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAMUExURczMzPf399fX1+bm5mzY9AMAAADiSURBVDjLvZXbEsMgCES5/P8/t9FuRVCRmU73JWlzosgSIIZURCjo/ad+EQJJB4Hv8BFt+IDpQoCx1wjOSBFhh2XssxEIYn3ulI/6MNReE07UIWJEv8UEOWDS88LY97kqyTliJKKtuYBbruAyVh5wOHiXmpi5we58Ek028czwyuQdLKPG1Bkb4NnM+VeAnfHqn1k4+GPT6uGQcvu2h2OVuIf/gWUFyy8OWEpdyZSa3aVCqpVoVvzZZ2VTnn2wU8qzVjDDetO90GSy9mVLqtgYSy231MxrY6I2gGqjrTY0L8fxCxfCBbhWrsYYAAAAAElFTkSuQmCC); display:block; height:44px; margin:0 auto -44px; position:relative; top:-22px; width:44px;"></div></div><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/p/BHCe0UIB0DN/" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">A photo posted by MTL Juicing (@mtljuicing)</a> on <time style=" font-family:Arial,sans-serif; font-size:14px; line-height:17px;" datetime="2016-06-24T13:23:46+00:00">Jun 24, 2016 at 6:23am PDT</time></p></div></blockquote>
 
       </div>
+
+      <h2>All Orders:</h2>
+      {{ orders }}
 
       <hr>
       <footer>
