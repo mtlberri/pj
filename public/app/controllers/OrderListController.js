@@ -26,6 +26,7 @@ app.controller("OrderListController", ["$scope", "$firebaseArray",
 
 	//Method to add a new Order, called by the form ng-submit
 	$scope.addOrder = function(){
+		
 		//Add the order in the overall list of orders (Firebase)
 		$scope.orders.$add({
 	    "orderNumber": $scope.lastOrderNumber() + 1,
