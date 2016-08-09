@@ -4,15 +4,43 @@ body {
   padding-bottom: 20px;
 }
 
-img.juices_main_page {
+
+/* Juices Description */
+img.juices_pictures {
+	width:38%; 
 	float: left;
-	margin-right: 10px;
-	width:200px; 
-	height:200px;
+}
+div.juices_descrition_container {
+	width:60%;
+	float:right;	
 }
 
-.Connect_Container {
+div.juices_description_text {
+	margin-bottom:5px;
+}
+div.juices_description_ingredients {
+	margin-bottom:10px;
+}
+div.juices_description_nutriments {
+	margin-bottom:5px;
+}
+
+/* Connect Container */
+div.connect_container {
 	margin: auto;
 	width:350px; 
 	height:550px;
 }
+.connect_element {
+	width:350px; 
+}
+
+hr.custo_hr {
+	width:350px; 
+	margin-top: 20px;
+	margin-bottom:20px;
+	margin-left: auto;
+	margin-right: auto;	
+}
+
+
