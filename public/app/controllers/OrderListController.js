@@ -8,25 +8,28 @@ var app = angular.module("pjApp", ["firebase"]);
 app.controller("OrderListController", ["$scope", "$firebaseArray", 
 	function($scope, $firebaseArray) {
 
-	//Firebase Array on orders
-	var refOrders = firebase.database().ref().child("orders");
-	$scope.orders = $firebaseArray(refOrders);
-	
-	//Observer on the Auth object to set $scope variable uid
+	//Observer on the Auth object to set $scope variable uid and orders
 	$scope.uid = null;
+	$scope.orders = null;
+
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
 			$scope.uid = user.uid;
 			console.log("$scope variable uid set to " + $scope.uid);
+			//Firebase Array on orders
+			var refOrders = firebase.database().ref().child("orders");
+			$scope.orders = $firebaseArray(refOrders);
 		} else {
 			$scope.uid = null;
 			console.log("$scope variable uid set to null");
+			$scope.orders = null;
 		}
 	});
 
 	//Method to add a new Order, called by the form ng-submit
 	$scope.addOrder = function(){
 		
+		if ($scope.uid) {
 		//Add the order in the overall list of orders (Firebase)
 		$scope.orders.$add({
 	    "orderNumber": $scope.lastOrderNumber() + 1,
@@ -46,6 +49,11 @@ app.controller("OrderListController", ["$scope", "$firebaseArray",
 
 			console.log("Index " + ref.key + " created under user orders!");
 			});
+		}
+		else {
+			alert("Please Sign In to be able to order ;)");
+		}
+
 
 	}
 
@@ -68,7 +76,8 @@ app.controller("OrderListController", ["$scope", "$firebaseArray",
 	//Method to filter orders in table (depending on order status, ...)
 	$scope.tableFilterFunction = function(value, index, array) {
 		var result;
-		if (value.status != "ARCHIVED") {
+		// If order is not archived and belongs to User, then displayed in table
+		if (value.status != "ARCHIVED" && value.userUid == $scope.uid) {
 			result = true;
 		} else {
 			result = false;
