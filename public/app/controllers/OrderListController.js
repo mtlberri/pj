@@ -14,15 +14,20 @@ app.controller("OrderListController", ["$scope", "$firebaseArray",
 
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
+			console.log("User is Logged In!");
 			$scope.uid = user.uid;
-			console.log("$scope variable uid set to " + $scope.uid);
+			console.log("$scope.uid set to " + $scope.uid);
 			//Firebase Array on orders
 			var refOrders = firebase.database().ref().child("orders");
 			$scope.orders = $firebaseArray(refOrders);
+			console.log("$scope.orders synced with Firebase!");
+
 		} else {
+			console.log("User is Logged Out!");
 			$scope.uid = null;
-			console.log("$scope variable uid set to null");
+			console.log("$scope.uid set to null");
 			$scope.orders = null;
+			console.log("$scope.ordes set to null");
 		}
 	});
 
