@@ -177,33 +177,93 @@
       <div id="firebaseui-auth-container"></div>
     </div>
 
-    <div class="container">
 
-      <div class="row"> <!-- Juices Div -->
+    <div class="container"> <!-- START of Juices CONTAINER Div -->
 
-        <div class="col-md-6"> <!-- Red Orange Div -->
+      <div class="row"> <!-- START of Juices ROW#1 Div -->
+
+        <div class="col-md-6"> <!-- START of Red Orange Column #1 Div -->
           <h2>The <i>"Red Orange"</i></h2>
-          <img class="juices_main_page img-rounded" src="images/red_orange-original.JPG" alt="Red Orange Juice">
-          <p>
-            The <i>"Red Orange"</i> is a perfect mix of <i>Beet</i> and <i>Carrots</i> as main ingredients. It is sweetened by <i>Apple</i> and spiced by <i>Ginger</i>.
-          </p>
-          <p>
-            Profile: Vitamin A, Vitamin C, ...
-          </p>
-        </div> <!-- End of Red Orange Div -->
+          <img class="juices_main_page img-rounded" src="images/red_orange_500x500.JPG" alt="Red Orange Juice">
 
-        <div class="col-md-6"> <!-- Green Energy Div -->
-          <h2>The <i>"Green Energy"</i></h2>
-          <img class="juices_main_page img-rounded" src="images/green_energy-original.JPG" alt="Green Energy Juice">
           <p>
-            The <i>"Green Energy"</i> is a perfect mix of <i>Kale</i> and <i>Spinach</i> as main ingredients. It is sweetened by <i>Apple</i> and spiced by <i>Ginger</i>.
+            The <i>"Red Orange"</i> is a perfect mix of <i>Beet</i> and <i>Carrots</i> as main ingredients. <br>
+            It is powered with <i>Lemon</i> for vitamins. Sweetened by <i>Apple</i> and spiced by <i>Ginger</i>.
+          </p>
+          <p>
+            <span class="label label-primary">Beet</span>
+            <span class="label label-primary">Carrots</span>
+            <span class="label label-primary">Lemon</span>
+            <span class="label label-primary">Apple</span>
+            <span class="label label-primary">Ginger</span>
+          </p>
+
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+              (Vitamine A): 60%
+            </div>
+          </div>
+
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+              (Vitamine C): 40%
+            </div>
+          </div>
+
+
+        </div> <!-- END of Red Orange Column #1 Div -->
+
+        <div class="col-md-6"> <!-- START of Green Energy Div -->
+          <h2>The <i>"Green Energy"</i></h2>
+          <img class="juices_main_page img-rounded" src="images/green_energy_500x500.JPG" alt="Green Energy Juice">
+          
+          <p>
+            The <i>"Green Energy"</i> is a perfect mix of <i>Kale</i> and <i>Spinach</i> as main ingredients. <br>
+            It is powered with <i>Lemon</i> for vitamins. Sweetened by <i>Apple</i> and spiced by <i>Ginger</i>.
           </p>
           <p>
             Profile: Vitamin A, Vitamin C, ...
           </p>
         </div> <!-- End of Green Energy Div -->
 
-      </div> <!-- End of Juices Div -->
+      </div> <!-- End of Juices ROW#1 Div -->
+
+      <div class="row"> <!-- START of Juices ROW#2 Div -->
+ 
+        <div class="col-md-6"> <!-- START of Celeri Taste -->
+          <h2>The <i>"Celeri Taste"</i></h2>
+          <img class="juices_main_page img-rounded" src="images/TBD.JPG" alt="Celeri Taste Juice">
+
+          <p>
+            The <i>"Celeri Taste"</i> is ... <br>
+            It is powered with <i>Lemon</i> for vitamins. Sweetened by <i>Apple</i> and spiced by <i>Ginger</i>.
+          </p>
+          <p>
+            Profile: Vitamin A, Vitamin C, ...
+          </p>
+
+        </div> <!-- END of Celeri Taste Column Div -->
+
+        <div class="col-md-6"> <!-- START of Orange Sunset Column Div -->
+          <h2>The <i>"Orange Sunset"</i></h2>
+          <img class="juices_main_page img-rounded" src="images/orange_sunset_500x500.JPG" alt="Orange Sunset Juice">
+
+          <p>
+            The <i>"Orange Sunset"</i> is ... <br>
+            It is powered with <i>Lemon</i> for vitamins. Sweetened by <i>Apple</i> and spiced by <i>Ginger</i>.
+          </p>
+          <p>
+            Profile: Vitamin A, Vitamin C, ...
+          </p>
+
+        </div> <!-- END of Orange Sunset Column Div -->
+
+      </div> <!-- END of Juices ROW#2 Div -->
+
+    </div> <!-- End of Juices CONTAINER Div -->
+
+    
+    <div class="container"> <!-- START of Orders Form CONTAINER Div -->    
 
       <hr>
       <!-- AngularJS Order Form -->
@@ -243,7 +303,11 @@
         </form>
       </div>
 
+    </div> <!-- END of Orders Form CONTAINER Div -->  
+
+    <div class="container"> <!-- START of Orders List CONTAINER Div --> 
       <hr>
+
       <!-- AngularJS Table of Orders -->
       <h2>Your Orders:</h2>
       <div>
@@ -269,7 +333,7 @@
             'label label-success': order.status == 'DELIVERED',
             'label label-warning': order.status == 'OOPS SORRY',
             'label label-default': order.status == 'CANCELLED'
-            }">{{ order.status }}<span></td>
+            }">{{ order.status }}</span></td>
             <td>
               <button type="button" class="btn btn-default" ng-click="changeOrderStatus(order,'CANCELLED')">Cancel
               </button>
@@ -278,6 +342,14 @@
         </table>
 
       </div>
+
+      <p>
+        Note about delivery hours: bla bla bla
+      </p>
+
+    </div> <!-- END of Orders List CONTAINER Div --> 
+
+    <div class="container"> <!-- START of Connect with me Div --> 
 
       <hr>
       <h2>Connect with me:</h2>
@@ -292,13 +364,18 @@
 
       </div>
 
-      <h2>All Orders:</h2>
-      {{ orders }}
+    </div> <!-- END of Connect with me Div --> 
 
+
+    <div class="container">
       <hr>
       <footer>
         <p>&copy; Plateau Juicing, Inc.</p>
       </footer>
-    </div> <!-- /container -->
+    </div>
+
+    <h2>All Orders (Debugging):</h2>
+    {{ orders }}
+
   </body>
 </html>
