@@ -18,7 +18,7 @@
     <!-- Bootstrap core CSS -->
     <link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="jumbotron.css" rel="stylesheet">
+    <link href="jumbotron.css" rel="stylesheet"> 
 
     <!-- Firebase configuration -->
     <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
@@ -60,6 +60,10 @@
 
   <!-- jQuery -->
   <script src="node_modules/jquery/dist/jquery.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>  
+
   <!-- AngularJS -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
   <!-- AngularFire -->
@@ -329,10 +333,12 @@
     <div class="container" style="width:350px;margin:auto"> <!-- START of Orders Form CONTAINER Div -->    
 
       <hr>
+
+
       <!-- AngularJS Order Form -->
       <h1 style="text-align:center;">Order Your Juice:</h1>
       <div ng-controller="AppController">
-        <form ng-submit="addOrder()">
+        <form ng-submit="orderClicked()">
 
           <div class="form-group">
             <label for="formJuice">Juice</label>
@@ -363,10 +369,60 @@
             <input type="text" class="form-control" style="width:300px" placeholder="E.g.: 4704 Rue de la Roche, Appartment#2" id="formAddress" ng-model="formAddress">
           </div>
           <div style="width:100px;margin:auto;">
-            <button type="submit" class="btn btn-primary btn-lg">Order! &raquo;</button> 
+            <button type="submit" class="btn btn-primary btn-lg" data-toggle="modal">Order! &raquo;</button> 
           </div>
         </form>
-      </div>
+
+        <!-- Modal (Order button pressed) -->
+        <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="orderModalLabel">Order confirmation</h4>
+              </div>
+              <div class="modal-body">
+                <p>You are about to make the following Order:</p>
+
+                  <ul class="list-group">
+                    <li class="list-group-item"><b>Juice:</b> {{ formJuice }}</li>
+                    <li class="list-group-item"><b>Quantity:</b> {{ formQty }}</li>
+                    <li class="list-group-item"><b>Delivery Date &amp Time Slot:</b> {{ formDateTime }}</li>
+                    <li class="list-group-item"><b>Delivery Address:</b> {{ formAddress }}</li>
+                  </ul>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" ng-click="addOrder()" data-dismiss="modal">Order!
+              </div>
+            </div>
+          </div>
+        </div> <!-- END of Order Modal -->
+
+
+
+        <!-- Modal (Sign In) -->
+        <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="signInModalLabel">Please Sign in</h4>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+              </div>
+            </div>
+          </div>
+        </div> <!-- END of Sign In Modal -->
+
+
+      </div> <!-- END of Angular Order form Div -->
+
+
+
+
 
     </div> <!-- END of Orders Form CONTAINER Div -->  
 

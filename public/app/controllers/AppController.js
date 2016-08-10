@@ -10,6 +10,7 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 
 	//Observer on the Auth object to set $scope variable uid and orders
 	$scope.uid = null;
+	$scope.userName = null;
 	$scope.orders = null;
 
 	firebase.auth().onAuthStateChanged(function(user) {
@@ -18,6 +19,8 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 			console.log("User is Logged In!");
 			$scope.uid = user.uid;
 			console.log("$scope.uid set to " + $scope.uid);
+			$scope.userName = user.displayName;
+			console.log("$scope.userName set to " + $scope.userName);
 
 			//Gather user info...
 			var displayName = user.displayName;
@@ -71,9 +74,25 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 		}
 	});
 
+	$scope.orderClicked = function(){
+			
+			//If user is signed in, show the Order modal
+			if($scope.uid) {
+				//Programmatically call the Modal for order confirmation
+				$('#orderModal').modal();				
+			}
+			//Else if user is not signed in
+			else {
+				//Programmatically call the Modal for sign in
+				$('#signInModal').modal();	
+			}
+
+
+	}
+
 	//Method to add a new Order, called by the form ng-submit
 	$scope.addOrder = function(){
-		
+
 		if ($scope.uid) {
 		//Add the order in the overall list of orders (Firebase)
 		$scope.orders.$add({
