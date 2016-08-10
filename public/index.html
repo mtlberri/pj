@@ -58,61 +58,6 @@
       ui.start('#firebaseui-auth-container', uiConfig);
     </script>
 
-    <script>
-    // Auth status management
-    initApp = function() {
-      firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-
-          var displayName = user.displayName;
-          var email = user.email;
-          var emailVerified = user.emailVerified;
-          var photoURL = user.photoURL;
-          var uid = user.uid;
-          var providerData = user.providerData;
-          user.getToken().then(function(accessToken) {
-
-            //Display name in the Nav bar
-            $("#user_name_navbar").text(displayName);
-            $("#sign_in_out").text("Sign out");
-
-            //jQuery hiding the Firebase UI Auth when the user is logged in
-            console.log("Hide Firebase UI Auth please!");
-            $("#firebaseui-auth-container").slideUp(1000);  
-
-            // Push user account details to HTML content
-            document.getElementById('userPhoto').src = photoURL;
-
-            // Set user account details to Firebase
-            firebase.database().ref("users/" + uid + "/userDetails/").set({
-              "displayName": displayName,
-              "email": email,
-              "emailVerified": emailVerified,
-              "photoURL": photoURL,
-              "uid": uid,
-              "accessToken": accessToken,
-              "providerData": providerData
-              });
-          }) 
-        }
-        else {
-          // User is signed out.
-          console.log("Show Firebase UI Auth please!");
-
-          //jQuery showing the Firebase UI Auth when the user is logged in
-          $("#firebaseui-auth-container").slideDown(1000); 
-
-        }
-      }, function(error) {
-        console.log(error);
-      });
-    };
-
-    window.addEventListener('load', function() {
-      initApp()
-    });
-  </script>
-
   <!-- jQuery -->
   <script src="node_modules/jquery/dist/jquery.js"></script>
   <!-- AngularJS -->
@@ -120,7 +65,7 @@
   <!-- AngularFire -->
   <script src="https://cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js"></script>
   <!-- PJ App Javascript -->
-  <script src="app/controllers/OrderListController.js"></script>
+  <script src="app/controllers/AppController.js"></script>
   <!-- Main JavaScript file -->
   <script src="js/mainJavaScript.js"></script>
   <!-- IG Embed -->
@@ -130,7 +75,7 @@
 
 <!-- //////////////////////////////////BODY/////////////////////////////////////// -->
 
-  <body ng-controller="OrderListController">
+  <body ng-controller="AppController">
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -386,7 +331,7 @@
       <hr>
       <!-- AngularJS Order Form -->
       <h1 style="text-align:center;">Order Your Juice:</h1>
-      <div ng-controller="OrderListController">
+      <div ng-controller="AppController">
         <form ng-submit="addOrder()">
 
           <div class="form-group">

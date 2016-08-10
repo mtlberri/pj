@@ -5,7 +5,7 @@ var app = angular.module("pjApp", ["firebase"]);
 
 
 //Inject firebaseObject into the controller
-app.controller("OrderListController", ["$scope", "$firebaseArray", 
+app.controller("AppController", ["$scope", "$firebaseArray", 
 	function($scope, $firebaseArray) {
 
 	//Observer on the Auth object to set $scope variable uid and orders
@@ -14,10 +14,46 @@ app.controller("OrderListController", ["$scope", "$firebaseArray",
 
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
+			//If user logged In
 			console.log("User is Logged In!");
 			$scope.uid = user.uid;
 			console.log("$scope.uid set to " + $scope.uid);
-			//Firebase Array on orders
+
+			//Gather user info...
+			var displayName = user.displayName;
+			var email = user.email;
+			var emailVerified = user.emailVerified;
+			var photoURL = user.photoURL;
+			var uid = user.uid;
+			var providerData = user.providerData;
+			user.getToken().then(function(accessToken) {
+
+				//Display name in the Nav bar
+				$("#user_name_navbar").text(displayName);
+				$("#sign_in_out").text("Sign out");
+
+				//jQuery hiding the Firebase UI Auth when the user is logged in
+				console.log("Hide Firebase UI Auth please!");
+				$("#firebaseui-auth-container").slideUp(1000);  
+
+				// Push user account details to HTML content
+				document.getElementById('userPhoto').src = photoURL;
+
+				// Set user account details to Firebase
+				firebase.database().ref("users/" + uid + "/userDetails/").set({
+				  "displayName": displayName,
+				  "email": email,
+				  "emailVerified": emailVerified,
+				  "photoURL": photoURL,
+				  "uid": uid,
+				  "accessToken": accessToken,
+				  "providerData": providerData
+				  });
+
+			}); 
+
+
+			//Firebase Array is synced on orders
 			var refOrders = firebase.database().ref().child("orders");
 			$scope.orders = $firebaseArray(refOrders);
 			console.log("$scope.orders synced with Firebase!");
@@ -28,6 +64,10 @@ app.controller("OrderListController", ["$scope", "$firebaseArray",
 			console.log("$scope.uid set to null");
 			$scope.orders = null;
 			console.log("$scope.ordes set to null");
+
+			console.log("Show Firebase UI Auth please!");
+			//jQuery showing the Firebase UI Auth when the user is logged in
+			$("#firebaseui-auth-container").slideDown(1000); 
 		}
 	});
 
