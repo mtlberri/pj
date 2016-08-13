@@ -78,10 +78,27 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 			
 			//If user is signed in, show the Order modal
 			if($scope.uid) {		
-				//Programmatically call the Modal for order confirmation
-				$('#orderModal').modal();				
+				
+				//If all mandatory fields are valid...
+				if($scope.orderForm.formJuice.$valid && 
+					$scope.orderForm.formQty.$valid &&
+					$scope.orderForm.formDateTime.$valid &&
+					$scope.orderForm.formAddress.$valid) {
+					//Programmatically call the Modal for order confirmation
+					$('#orderModal').modal();					
+				} else {
+					//Pop-up a Modal to prompt user to fill mandatory fields
+					$('#orderFieldsMissingModal').modal();	
+					//Format the invalid fields to highlight errors to user
+					//If field valid it will not be formatted
+					//If field invalid it will be formatted in error
+					$scope.orderFormValidationFormatting('formJuiceCase');
+					$scope.orderFormValidationFormatting('formQtyCase');
+					$scope.orderFormValidationFormatting('formDateTimeCase');
+					$scope.orderFormValidationFormatting('formAddressCase');
+				}
+			
 			}
-
 
 			//Else if user is not signed in
 			else {
@@ -92,24 +109,46 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 
 	};
 
-	$scope.orderFormValidationFormatting = function(){
-		console.log("Form Control Formatting!");
+	//Format order form "formId" if entry is not valid
+	$scope.orderFormValidationFormatting = function(formIdCase){
 
-		//Check if the form input has been touched already or not yet
-		//Dirty is True if user has already interacted with the form.
-		if($scope.orderForm.formJuice.$dirty) {
+		switch(formIdCase) {
+			
+			case 'formJuiceCase':
+				//Check if form input is valid or not, and format accordingly
+				if($scope.orderForm.formJuice.$valid) {
+					$("#formGroupJuice").removeClass("has-error");
+				} else {
+					$("#formGroupJuice").addClass("has-error");
+				}
+			break;
 
-			//Check if form input is valid or not, and format accordingly
-			if($scope.orderForm.formJuice.$valid) {
-				$("#formGroupJuice").removeClass("has-error");
-				$("#formGroupJuice").addClass("has-success");
-				console.log("has-success class set!");
-			} else {
-				$("#formGroupJuice").addClass("has-error");
-				$("#formGroupJuice").removeClass("has-success");
-				console.log("has-error class set!");
-			}
+			case 'formQtyCase':
+				if($scope.orderForm.formQty.$valid) {
+					$("#formGroupQty").removeClass("has-error");
+				} else {
+					$("#formGroupQty").addClass("has-error");
+				}
+			break;
 
+			case 'formDateTimeCase':
+				if($scope.orderForm.formDateTime.$valid) {
+					$("#formGroupDateTime").removeClass("has-error");
+				} else {
+					$("#formGroupDateTime").addClass("has-error");
+				}
+			break;
+
+			case 'formAddressCase':
+				if($scope.orderForm.formAddress.$valid) {
+					$("#formGroupAddress").removeClass("has-error");
+				} else {
+					$("#formGroupAddress").addClass("has-error");
+				}
+			break;
+
+			default: 
+			break;
 		}
 
 	};
@@ -125,6 +164,7 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	    "qty": $scope.formQty,
 	    "date_time": $scope.formDateTime,
 	    "delivery_address": $scope.formAddress,
+	    "free_text": $scope.formFreeText,
 	    "status": "ORDERED",
 	    "paid": false,
 	    "userUid": firebase.auth().currentUser.uid,

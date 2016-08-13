@@ -343,20 +343,17 @@
 
           <div class="form-group" id="formGroupJuice">
             <label for="formJuice">Juice</label>
-            <select class="form-control has-success" style="width:150px" id="formJuice" ng-model="formJuice" name="formJuice" ng-change="orderFormValidationFormatting()" required>
+            <select class="form-control" style="width:150px" id="formJuice" ng-model="formJuice" name="formJuice" ng-change="orderFormValidationFormatting('formJuiceCase')" required>
               <option>Red Orange</option>
               <option>Green Energy</option>
               <option>Celeri Wiz</option>
               <option>Orange Sunset</option>
             </select>
-
-            Juice input is: {{ orderForm.formJuice }}
-
           </div> 
 
-          <div class="form-group">
+          <div class="form-group" id="formGroupQty">
             <label for="formQty">Quantity</label>
-            <select class="form-control" style="width:50px" id="formQty" ng-model="formQty">
+            <select class="form-control" style="width:50px" id="formQty" ng-model="formQty" name="formQty" ng-change="orderFormValidationFormatting('formQtyCase')" required>
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -365,19 +362,19 @@
             </select>
           </div> 
 
-          <div class="form-group">
+          <div class="form-group" id="formGroupDateTime">
             <label for="formDateTime">Delivery Date &amp Time Slot</label>
-            <input type="datetime" class="form-control" style="width:300px" placeholder="E.g.: Jul 7 between 6PM and 8PM" id="formDateTime" ng-model="formDateTime">
+            <input type="datetime" class="form-control" style="width:300px" placeholder="E.g.: Jul 7 between 6PM and 8PM" id="formDateTime" ng-model="formDateTime" name="formDateTime" ng-change="orderFormValidationFormatting('formDateTimeCase')" required>
           </div>  
 
-          <div class="form-group">
+          <div class="form-group" id="formGroupAddress">
             <label for="formAddress">Delivery Address:</label>
-            <input type="text" class="form-control" style="width:300px" placeholder="E.g.: 4704 Rue de la Roche, Appartment#2" id="formAddress" ng-model="formAddress">
+            <input type="text" class="form-control" style="width:300px" placeholder="E.g.: 4704 Rue de la Roche, Appartment#2" id="formAddress" ng-model="formAddress" name="formAddress" ng-change="orderFormValidationFormatting('formAddressCase')" required>
           </div>
 
           <div class="form-group">
-            <label for="formFreeText">Additional info for me: <i>(Optional)</i></label>
-            <textarea class="form-control" rows="3" style="width:300px;" placeholder="E.g.: Please do juice with lot of Ginger. My friend John will pick-up your delivery. Thx!" id="formFreeText" ng-model="formFreeText"></textarea>
+            <label for="formFreeText">Message to @plateaujuices: <i>(Optional)</i></label>
+            <textarea class="form-control" rows="3" style="width:300px;" placeholder="E.g.: Please do juice with lot of Ginger. My friend John will pick-up your delivery. Thx!" id="formFreeText" ng-model="formFreeText" name="formFreeText"></textarea>
           </div>
 
 
@@ -392,16 +389,16 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="orderModalLabel">Order confirmation</h4>
+                <h4 class="modal-title" id="orderModalLabel">You are about to make the following Order:</h4>
               </div>
               <div class="modal-body">
-                <p>You are about to make the following Order:</p>
 
                   <ul class="list-group">
                     <li class="list-group-item"><b>Juice:</b> {{ formJuice }}</li>
                     <li class="list-group-item"><b>Quantity:</b> {{ formQty }}</li>
                     <li class="list-group-item"><b>Delivery Date &amp Time Slot:</b> {{ formDateTime }}</li>
                     <li class="list-group-item"><b>Delivery Address:</b> {{ formAddress }}</li>
+                    <li class="list-group-item"><b>Message to @plateaujuices:</b> {{ formFreeText }}</li>
                   </ul>
 
               </div>
@@ -429,6 +426,22 @@
             </div>
           </div>
         </div> <!-- END of Sign In Modal -->
+
+
+        <!-- Modal (Oops some order fields missing) -->
+        <div class="modal fade" id="orderFieldsMissingModal" tabindex="-1" role="dialog" aria-labelledby="orderFieldsMissingModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="orderFieldsMissingModal">Oops.. looks like you forgot to fill some fields in your order</h4>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+              </div>
+            </div>
+          </div>
+        </div> <!-- END of Modal (Oops some order fields missing)-->
 
 
       </div> <!-- END of Angular Order form Div -->
