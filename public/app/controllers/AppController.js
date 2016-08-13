@@ -77,10 +77,12 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	$scope.orderClicked = function(){
 			
 			//If user is signed in, show the Order modal
-			if($scope.uid) {
+			if($scope.uid) {		
 				//Programmatically call the Modal for order confirmation
 				$('#orderModal').modal();				
 			}
+
+
 			//Else if user is not signed in
 			else {
 				//Programmatically call the Modal for sign in
@@ -88,7 +90,29 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 			}
 
 
-	}
+	};
+
+	$scope.orderFormValidationFormatting = function(){
+		console.log("Form Control Formatting!");
+
+		//Check if the form input has been touched already or not yet
+		//Dirty is True if user has already interacted with the form.
+		if($scope.orderForm.formJuice.$dirty) {
+
+			//Check if form input is valid or not, and format accordingly
+			if($scope.orderForm.formJuice.$valid) {
+				$("#formGroupJuice").removeClass("has-error");
+				$("#formGroupJuice").addClass("has-success");
+				console.log("has-success class set!");
+			} else {
+				$("#formGroupJuice").addClass("has-error");
+				$("#formGroupJuice").removeClass("has-success");
+				console.log("has-error class set!");
+			}
+
+		}
+
+	};
 
 	//Method to add a new Order, called by the form ng-submit
 	$scope.addOrder = function(){
@@ -119,7 +143,7 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 		}
 
 
-	}
+	};
 
 	//Method to retrieve the last order number from list of orders
 	$scope.lastOrderNumber = function() {
@@ -128,7 +152,7 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 			result = $scope.orders[$scope.orders.length - 1].orderNumber;
 		}
 		return result;
-	}
+	};
 
 	//Method to change order status
 	$scope.changeOrderStatus = function(order,newStatus) {

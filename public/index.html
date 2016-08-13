@@ -338,14 +338,20 @@
       <!-- AngularJS Order Form -->
       <h1 style="text-align:center;">Order Your Juice:</h1>
       <div ng-controller="AppController">
-        <form ng-submit="orderClicked()">
+       
+        <form novalidate class="css-form" ng-submit="orderClicked()" name="orderForm">
 
-          <div class="form-group">
+          <div class="form-group" id="formGroupJuice">
             <label for="formJuice">Juice</label>
-            <select class="form-control" style="width:150px" id="formJuice" ng-model="formJuice">
+            <select class="form-control has-success" style="width:150px" id="formJuice" ng-model="formJuice" name="formJuice" ng-change="orderFormValidationFormatting()" required>
               <option>Red Orange</option>
               <option>Green Energy</option>
+              <option>Celeri Wiz</option>
+              <option>Orange Sunset</option>
             </select>
+
+            Juice input is: {{ orderForm.formJuice }}
+
           </div> 
 
           <div class="form-group">
@@ -361,13 +367,20 @@
 
           <div class="form-group">
             <label for="formDateTime">Delivery Date &amp Time Slot</label>
-            <input type="datetime" class="form-control" style="width:300px" placeholder="E.g.: Jul 7th between 6PM and 8PM" id="formDateTime" ng-model="formDateTime">
+            <input type="datetime" class="form-control" style="width:300px" placeholder="E.g.: Jul 7 between 6PM and 8PM" id="formDateTime" ng-model="formDateTime">
           </div>  
 
           <div class="form-group">
             <label for="formAddress">Delivery Address:</label>
             <input type="text" class="form-control" style="width:300px" placeholder="E.g.: 4704 Rue de la Roche, Appartment#2" id="formAddress" ng-model="formAddress">
           </div>
+
+          <div class="form-group">
+            <label for="formFreeText">Additional info for me: <i>(Optional)</i></label>
+            <textarea class="form-control" rows="3" style="width:300px;" placeholder="E.g.: Please do juice with lot of Ginger. My friend John will pick-up your delivery. Thx!" id="formFreeText" ng-model="formFreeText"></textarea>
+          </div>
+
+
           <div style="width:100px;margin:auto;">
             <button type="submit" class="btn btn-primary btn-lg" data-toggle="modal">Order! &raquo;</button> 
           </div>
