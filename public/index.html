@@ -364,7 +364,7 @@
 
           <div class="form-group" id="formGroupDateTime">
             <label for="formDateTime">Delivery Date &amp Time Slot</label>
-            <input type="datetime" class="form-control" style="width:300px" placeholder="E.g.: Jul 7 between 6PM and 8PM" id="formDateTime" ng-model="formDateTime" name="formDateTime" ng-change="orderFormValidationFormatting('formDateTimeCase')" required>
+            <input type="datetime" class="form-control" style="width:300px" placeholder="E.g.: Jul 7 between 6PM and 7PM" id="formDateTime" ng-model="formDateTime" name="formDateTime" ng-change="orderFormValidationFormatting('formDateTimeCase')" required>
           </div>  
 
           <div class="form-group" id="formGroupAddress">
@@ -374,7 +374,7 @@
 
           <div class="form-group">
             <label for="formFreeText">Message to @plateaujuices: <i>(Optional)</i></label>
-            <textarea class="form-control" rows="3" style="width:300px;" placeholder="E.g.: Please do juice with lot of Ginger. My friend John will pick-up your delivery. Thx!" id="formFreeText" ng-model="formFreeText" name="formFreeText"></textarea>
+            <textarea class="form-control" rows="3" style="width:300px;" placeholder="E.g.: Please put lots of ginger. My friend John will pick-up your delivery. Thx!" id="formFreeText" ng-model="formFreeText" name="formFreeText"></textarea>
           </div>
 
 
@@ -483,7 +483,7 @@
             'label label-default': order.status == 'CANCELLED'
             }">{{ order.status }}</span></td>
             <td>
-              <button type="button" class="btn btn-default" ng-click="changeOrderStatus(order,'CANCELLED')">Cancel
+              <button type="button" class="btn btn-default" ng-show="order.status == 'ORDERED'" ng-click="cancelBtnPressed(order)">Cancel
               </button>
             </td>
           </tr>          
@@ -492,22 +492,21 @@
       </div>
 
 
-      <!-- Modal (Cancellation Etiquette)-->
-      <div class="modal fade" id="orderFieldsMissingModal" tabindex="-1" role="dialog" aria-labelledby="orderFieldsMissingModalLabel">
+      <!-- Modal (Order Cancel Pressed) -->
+      <div class="modal fade" id="orderCancelModal" tabindex="-1" role="dialog" aria-labelledby="orderCancelModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="orderFieldsMissingModal">Oops.. looks like you forgot to fill some fields in your order</h4>
+              <h4 class="modal-title" id="orderCancelModalLabel">Are you sure you want to Cancel that order?</h4>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+              <button type="button" class="btn btn-primary" ng-click="changeOrderStatus(orderBeingCancelled,'CANCELLED')" data-dismiss="modal">Cancel!
             </div>
           </div>
         </div>
-      </div> <!-- END of Modal (Oops some order fields missing)-->
-
-
+      </div> <!-- END of Modal (Order Cancel Pressed)-->
 
 
       <h4 style="text-align:center">Note about my deliveries:</h4>

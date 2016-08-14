@@ -12,7 +12,10 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	$scope.uid = null;
 	$scope.userName = null;
 	$scope.orders = null;
+	
+	//various global scope variables initialization
 	$scope.formFreeText = null;
+	$scope.orderBeingCancelled = null;
 
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
@@ -152,6 +155,15 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 		}
 		return result;
 	};
+
+	//Method called when Cancel button pressed
+	$scope.cancelBtnPressed = function(orderToCancel) {
+		
+		//Record the order being cancelled for use by pop-up modal
+		$scope.orderBeingCancelled = orderToCancel;
+		//Pop-up modal
+		$('#orderCancelModal').modal();
+	};	
 
 	//Method to change order status
 	$scope.changeOrderStatus = function(order,newStatus) {
