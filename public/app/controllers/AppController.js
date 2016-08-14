@@ -12,6 +12,7 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	$scope.uid = null;
 	$scope.userName = null;
 	$scope.orders = null;
+	$scope.formFreeText = null;
 
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
@@ -109,6 +110,68 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 
 	};
 
+
+	//Method to add a new Order, called by the form ng-submit
+	$scope.addOrder = function(){
+
+		if ($scope.uid) {
+		//Add the order in the overall list of orders (Firebase)
+		console.log("Add Order to Firebase!");
+		$scope.orders.$add({
+	    "orderNumber": $scope.lastOrderNumber() + 1,
+	    "juice_id": $scope.formJuice,	        
+	    "qty": $scope.formQty,
+	    "date_time": $scope.formDateTime,
+	    "delivery_address": $scope.formAddress,
+	    "free_text": $scope.formFreeText,
+	    "status": "ORDERED",
+	    "paid": false,
+	    "userUid": firebase.auth().currentUser.uid,
+	    "userDisplayName": firebase.auth().currentUser.displayName       
+		}).then(function(ref) {
+
+			//Index the order under the users/<userUid>/userOrders/ part of the tree
+			var refUserOrders = firebase.database().ref().child("users/" 
+				+ firebase.auth().currentUser.uid + "/userOrders/" + ref.key).set(true);
+
+			console.log("Index " + ref.key + " created under user orders!");
+			});
+		}
+		else {
+			//Do Nothing
+		}
+
+
+	};
+
+	//Method to retrieve the last order number from list of orders
+	$scope.lastOrderNumber = function() {
+		var result = 0;
+		if ($scope.orders.length > 0) {
+			result = $scope.orders[$scope.orders.length - 1].orderNumber;
+		}
+		return result;
+	};
+
+	//Method to change order status
+	$scope.changeOrderStatus = function(order,newStatus) {
+		order.status = newStatus;
+		$scope.orders.$save(order);
+		console.log("order status changed!");
+	};
+
+	//Method to filter orders in table (depending on order status, ...)
+	$scope.tableFilterFunction = function(value, index, array) {
+		var result;
+		// If order is not archived and belongs to User, then displayed in table
+		if (value.status != "ARCHIVED" && value.userUid == $scope.uid) {
+			result = true;
+		} else {
+			result = false;
+		}
+		return result;
+	};	
+
 	//Format order form "formId" if entry is not valid
 	$scope.orderFormValidationFormatting = function(formIdCase){
 
@@ -152,66 +215,6 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 		}
 
 	};
-
-	//Method to add a new Order, called by the form ng-submit
-	$scope.addOrder = function(){
-
-		if ($scope.uid) {
-		//Add the order in the overall list of orders (Firebase)
-		$scope.orders.$add({
-	    "orderNumber": $scope.lastOrderNumber() + 1,
-	    "juice_id": $scope.formJuice,	        
-	    "qty": $scope.formQty,
-	    "date_time": $scope.formDateTime,
-	    "delivery_address": $scope.formAddress,
-	    "free_text": $scope.formFreeText,
-	    "status": "ORDERED",
-	    "paid": false,
-	    "userUid": firebase.auth().currentUser.uid,
-	    "userDisplayName": firebase.auth().currentUser.displayName       
-		}).then(function(ref) {
-
-			//Index the order under the users/<userUid>/userOrders/ part of the tree
-			var refUserOrders = firebase.database().ref().child("users/" 
-				+ firebase.auth().currentUser.uid + "/userOrders/" + ref.key).set(true);
-
-			console.log("Index " + ref.key + " created under user orders!");
-			});
-		}
-		else {
-			alert("Please Sign In to be able to order ;)");
-		}
-
-
-	};
-
-	//Method to retrieve the last order number from list of orders
-	$scope.lastOrderNumber = function() {
-		var result = 0;
-		if ($scope.orders.length > 0) {
-			result = $scope.orders[$scope.orders.length - 1].orderNumber;
-		}
-		return result;
-	};
-
-	//Method to change order status
-	$scope.changeOrderStatus = function(order,newStatus) {
-		order.status = newStatus;
-		$scope.orders.$save(order);
-		console.log("order status changed!");
-	};
-
-	//Method to filter orders in table (depending on order status, ...)
-	$scope.tableFilterFunction = function(value, index, array) {
-		var result;
-		// If order is not archived and belongs to User, then displayed in table
-		if (value.status != "ARCHIVED" && value.userUid == $scope.uid) {
-			result = true;
-		} else {
-			result = false;
-		}
-		return result;
-	};	
 
 	//Method to Delete an Order (NOT TO BE USED!!!)
 	/*
