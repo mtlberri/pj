@@ -179,7 +179,7 @@
  
         <div class="col-md-6"> <!-- START of Celery Wiz Column #1 Div -->
           <h2>The <i>Celery Wiz</i></h2>
-          <img class="juices_pictures img-rounded" src="images/green_energy_500x500.JPG" alt="Celery Wiz Juice">
+          <img class="juices_pictures img-rounded" src="images/celery_wiz_500x500.JPG" alt="Celery Wiz Juice">
 
           <div class="juices_descrition_container"> <!-- START of Description Div -->
 
@@ -285,7 +285,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="orderModalLabel">You are about to make the following Order:</h4>
+                <h4 class="modal-title" id="orderModalLabel">({{userName}}) You are about to make the following Order:</h4>
               </div>
               <div class="modal-body">
 
@@ -449,9 +449,6 @@
         <p style="text-align:center;">&copy; Plateau Juices</p>
       </footer>
     </div>
-
-    <h2>All Orders (Debugging):</h2>
-    {{ orders }}
 
   </body>
 </html>

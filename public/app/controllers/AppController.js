@@ -44,7 +44,13 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 				$("#firebaseui-auth-container").slideUp(1000);  
 
 				// Push user account details to HTML content
-				document.getElementById('userPhoto').src = photoURL;
+				if (photoURL != null) {
+					//Use valid Photo URL from Google or Facebook 
+					document.getElementById('userPhoto').src = photoURL;
+				} else {
+					//Else, Default photo is used
+					document.getElementById('userPhoto').src = "images/default_user.png";
+				}
 
 				// Set user account details to Firebase
 				firebase.database().ref("users/" + uid + "/userDetails/").set({
