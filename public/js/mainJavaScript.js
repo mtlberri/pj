@@ -14,3 +14,20 @@ window.fbAsyncInit = function() {
    js.src = "//connect.facebook.net/en_US/sdk.js";
    fjs.parentNode.insertBefore(js, fjs);
  }(document, 'script', 'facebook-jssdk'));
+
+//Various variables for showing or hiding nutrients
+var showNutriRedOrange = false;
+
+//Function called when show nutrients pressed
+var showNutrientsClicked = function() {
+  console.log("Show nutrients pressed!");
+
+  if(showNutriRedOrange) {
+    $("#nutri_red_orange").slideUp(1000);
+    showNutriRedOrange = false;
+  } else {
+    $("#nutri_red_orange").slideDown(1000);
+    showNutriRedOrange = true;
+  }
+
+};

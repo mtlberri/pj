@@ -19,9 +19,13 @@ div.juices_description_text {
 	margin-bottom:5px;
 }
 div.juices_description_ingredients {
-	margin-bottom:10px;
+	margin-bottom:0px;
 }
 div.juices_description_nutriments {
+	margin-bottom:5px;
+}
+hr.hr-juice-ingredients {
+	margin-top:5px;
 	margin-bottom:5px;
 }
 
