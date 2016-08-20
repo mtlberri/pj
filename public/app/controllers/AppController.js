@@ -17,6 +17,13 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	$scope.formFreeText = null;
 	$scope.orderBeingCancelled = null;
 
+	//datepicker configuration
+	$(".datepicker").datepicker({
+		format: "mm/dd/yyyy",
+		startDate: "+1d",
+		daysOfWeekDisabled: [0,6]
+	})
+
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
 			//If user logged In
