@@ -21,6 +21,18 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	    disabledDates: []
 	  });
 
+	//Listener on datepicker - when changed it updates scope var
+	$("#datetimepicker5").on("dp.change", function() {
+
+		console.log("Date Changed!");
+		$scope.orderFormDate = $("#datetimepicker5").data("DateTimePicker").date().toString();
+		//Digest the change of scope to refresh view
+		$scope.$digest();
+		console.log($scope.orderFormDate);
+	    //$scope.selecteddate = $("#datetimepicker").val();
+
+	});
+
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
 			//If user logged In
@@ -239,16 +251,6 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	};
 
 
-    $("#datetimepicker5").on("dp.change", function() {
-
-    	console.log("Date Changed!");
-    	$scope.orderFormDate = $("#datetimepicker5").data("DateTimePicker").date().toString();
-    	console.log($scope.orderFormDate);
-        //$scope.selecteddate = $("#datetimepicker").val();
-
-    });
-
-
 	//Method to Delete an Order (NOT TO BE USED!!!)
 	/*
 	$scope.removeOrder = function(order) {
@@ -258,3 +260,10 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	*/
 	}
 ]);
+
+
+
+
+
+
+

@@ -240,7 +240,7 @@
 
       <!-- AngularJS Order Form -->
       <h1 style="text-align:center;">Order Your Juice:</h1>
-      <div ng-controller="AppController">
+      <div>
        
         <form novalidate class="css-form" ng-submit="orderClicked()" name="orderForm">
 
@@ -268,7 +268,6 @@
           <div class="form-group" id="formGroupDateTime">
             <label for="formDateTime">Delivery Date &amp Time Slot</label>
             <input type="datetime" class="form-control" style="width:300px" placeholder="E.g.: Jul 7 between 6PM and 7PM" id="formDateTime" ng-model="formDateTime" name="formDateTime" ng-change="orderFormValidationFormatting('formDateTimeCase')" required>
-            Date and time is: {{formDateTime}}
           </div>  
 
 
@@ -281,8 +280,7 @@
                       <span class="glyphicon glyphicon-calendar"></span>
                   </span>
               </div>
-
-              Date is: {{ userName }}
+              Date is: {{orderFormDate}}
           </div>
 
 
