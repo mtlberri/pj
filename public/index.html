@@ -75,9 +75,12 @@
   <!-- IG Embed -->
   <script async defer src="//platform.instagram.com/en_US/embeds.js"></script>
 
-  <!-- bootstrap-datepicker -->
-  <link rel="stylesheet" type="text/css" href="bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
-  <script src="bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+  <!-- DateTimePicker -->
+  <script type="text/javascript" src="bower_components/moment/min/moment.min.js"></script>
+  <script type="text/javascript" src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+  <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+
 
   </head>
 
@@ -265,27 +268,23 @@
           <div class="form-group" id="formGroupDateTime">
             <label for="formDateTime">Delivery Date &amp Time Slot</label>
             <input type="datetime" class="form-control" style="width:300px" placeholder="E.g.: Jul 7 between 6PM and 7PM" id="formDateTime" ng-model="formDateTime" name="formDateTime" ng-change="orderFormValidationFormatting('formDateTimeCase')" required>
+            Date and time is: {{formDateTime}}
           </div>  
 
 
 
-
-
-
-
-
-
-
-
           <div class="form-group" id="formGroupDate">
-            <label for="formDate">Delivery Date</label>
-            <div class="input-group date" data-provide="datepicker" data-date-start-date="+1d" style="width:145px">
-              <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="formDate" ng-model="formDate" name="formDate"  required>
-              <div class="input-group-addon">
-                  <span class="glyphicon glyphicon-th"></span>
+              <label for="datetimepicker5">Delivery Date</label>
+              <div class='input-group date' id='datetimepicker5' style="width:210px">
+                  <input type='text' class="form-control" id="formDate" name="formDate" required>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
               </div>
-            </div>
+
+              Date is: {{ userName }}
           </div>
+
 
 
 

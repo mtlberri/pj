@@ -1,9 +1,6 @@
 //AngularFire - Synchronized Array for Oders
 var app = angular.module("pjApp", ["firebase"]);
 
-//Factory that creates a re-usable order object
-
-
 //Inject firebaseObject into the controller
 app.controller("AppController", ["$scope", "$firebaseArray", 
 	function($scope, $firebaseArray) {
@@ -16,13 +13,13 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	//various global scope variables initialization
 	$scope.formFreeText = null;
 	$scope.orderBeingCancelled = null;
+	$scope.orderFormDate = null;
 
-	//datepicker configuration
-	$(".datepicker").datepicker({
-		format: "mm/dd/yyyy",
-		startDate: "+1d",
-		daysOfWeekDisabled: [0,6]
-	})
+	//Init of datetimepicker
+	$('#datetimepicker5').datetimepicker({
+	    format: "dddd, MMM Do",
+	    disabledDates: []
+	  });
 
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
@@ -138,6 +135,7 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	    "juice_id": $scope.formJuice,	        
 	    "qty": $scope.formQty,
 	    "date_time": $scope.formDateTime,
+	    //"date": $scope.formDate,
 	    "delivery_address": $scope.formAddress,
 	    "free_text": $scope.formFreeText,
 	    "status": "ORDERED",
@@ -156,7 +154,6 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 		else {
 			//Do Nothing
 		}
-
 
 	};
 
@@ -240,6 +237,17 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 		}
 
 	};
+
+
+    $("#datetimepicker5").on("dp.change", function() {
+
+    	console.log("Date Changed!");
+    	$scope.orderFormDate = $("#datetimepicker5").data("DateTimePicker").date().toString();
+    	console.log($scope.orderFormDate);
+        //$scope.selecteddate = $("#datetimepicker").val();
+
+    });
+
 
 	//Method to Delete an Order (NOT TO BE USED!!!)
 	/*
