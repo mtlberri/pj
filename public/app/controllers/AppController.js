@@ -14,23 +14,44 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	$scope.formFreeText = null;
 	$scope.orderBeingCancelled = null;
 	$scope.orderFormDate = null;
+	$scope.orderFormTimeFrom = null;
+	$scope.orderFormTimeTo = null;
 
-	//Init of datetimepicker
+	//Init of date picker
 	$('#datetimepicker5').datetimepicker({
 	    format: "dddd, MMM Do",
 	    disabledDates: []
 	  });
+	//Init of time from picker
+	$('#datetimepicker3').datetimepicker({
+	    format: "LT"
+	  });
+	//Init of time to picker
+	$('#datetimepicker4').datetimepicker({
+	    format: "LT"
+	  });	
 
 	//Listener on datepicker - when changed it updates scope var
 	$("#datetimepicker5").on("dp.change", function() {
-
 		console.log("Date Changed!");
 		$scope.orderFormDate = $("#datetimepicker5").data("DateTimePicker").date().toString();
 		//Digest the change of scope to refresh view
 		$scope.$digest();
 		console.log($scope.orderFormDate);
-	    //$scope.selecteddate = $("#datetimepicker").val();
-
+	});
+	//Listener on time from picker
+	$("#datetimepicker3").on("dp.change", function() {
+		var timeFromHours = $("#datetimepicker3").data("DateTimePicker").date().hour().toString();
+		var timeFromMinutes = $("#datetimepicker3").data("DateTimePicker").date().minute().toString();
+		$scope.orderFormTimeFrom = timeFromHours + "h" + timeFromMinutes;
+		$scope.$digest();
+	});
+	//Listener on time to picker
+	$("#datetimepicker4").on("dp.change", function() {
+		var timeToHours = $("#datetimepicker4").data("DateTimePicker").date().hour().toString();
+		var timeToMinutes = $("#datetimepicker4").data("DateTimePicker").date().minute().toString();
+		$scope.orderFormTimeTo = timeToHours + "h" + timeToMinutes;
+		$scope.$digest();
 	});
 
 	firebase.auth().onAuthStateChanged(function(user) {
