@@ -265,13 +265,6 @@
             </select>
           </div> 
 
-          <div class="form-group" id="formGroupDateTime">
-            <label for="formDateTime">Delivery Date &amp Time Slot</label>
-            <input type="datetime" class="form-control" style="width:300px" placeholder="E.g.: Jul 7 between 6PM and 7PM" id="formDateTime" ng-model="formDateTime" name="formDateTime" ng-change="orderFormValidationFormatting('formDateTimeCase')" required>
-          </div>  
-
-
-
           <div class="form-group" id="formGroupDate">
               <label for="datetimepicker5">Delivery Date</label>
               <div class='input-group date' id='datetimepicker5' style="width:210px">
@@ -306,15 +299,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
           <div class="form-group" id="formGroupAddress">
             <label for="formAddress">Delivery Address:</label>
             <input type="text" class="form-control" style="width:300px" placeholder="E.g.: 4704 Rue de la Roche, Appartment#2" id="formAddress" ng-model="formAddress" name="formAddress" ng-change="orderFormValidationFormatting('formAddressCase')" required>
@@ -344,7 +328,9 @@
                   <ul class="list-group">
                     <li class="list-group-item"><b>Juice:</b> {{ formJuice }}</li>
                     <li class="list-group-item"><b>Quantity:</b> {{ formQty }}</li>
-                    <li class="list-group-item"><b>Delivery Date &amp Time Slot:</b> {{ formDateTime }}</li>
+                    <li class="list-group-item"><b>Delivery Date:</b> {{ orderFormDate }}</li>
+                    <li class="list-group-item"><b>Delivery Time (From):</b> {{ orderFormTimeFrom }}</li>
+                    <li class="list-group-item"><b>Delivery Time (To):</b> {{ orderFormTimeTo }}</li>
                     <li class="list-group-item"><b>Delivery Address:</b> {{ formAddress }}</li>
                     <li class="list-group-item"><b>Message to @plateaujuices:</b> {{ formFreeText }}</li>
                   </ul>
@@ -412,7 +398,7 @@
             <th>Order #</th>
             <th>Juice</th>
             <th>Quantity</th>
-            <th>Delivery Date &amp Time Slot</th>
+            <th>Delivery Date &amp Time</th>
             <th>Delivery Address</th>
             <th>Status</th>
             <th>Actions</th>
@@ -421,7 +407,7 @@
             <td>{{ order.orderNumber }}</td>
             <td>{{ order.juice_id }}</td>
             <td>{{ order.qty }}</td>
-            <td>{{ order.date_time }}</td>
+            <td>{{ order.delivery_date }} {{ order.delivery_time_from }} - {{ order.delivery_time_to }}</td>
             <td>{{ order.delivery_address }}</td>
             <td><span ng-class="{
             'label label-primary': order.status == 'ORDERED',

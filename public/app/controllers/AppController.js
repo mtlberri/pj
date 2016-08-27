@@ -129,8 +129,8 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 				//If all mandatory fields are valid...
 				if($scope.orderForm.formJuice.$valid && 
 					$scope.orderForm.formQty.$valid &&
-					$scope.orderForm.formDateTime.$valid &&
 					$scope.orderForm.formAddress.$valid &&
+					$scope.orderFormDate &&
 					$scope.orderFormTimeFrom &&
 					$scope.orderFormTimeTo) {
 					//Programmatically call the Modal for order confirmation
@@ -143,10 +143,10 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 					//If field invalid it will be formatted in error
 					$scope.orderFormValidationFormatting('formJuiceCase');
 					$scope.orderFormValidationFormatting('formQtyCase');
-					$scope.orderFormValidationFormatting('formDateTimeCase');
-					$scope.orderFormValidationFormatting('formAddressCase');
+					$scope.orderFormValidationFormatting('formDateCase');
 					$scope.orderFormValidationFormatting('formTimeFromCase');
 					$scope.orderFormValidationFormatting('formTimeToCase');
+					$scope.orderFormValidationFormatting('formAddressCase');
 				}
 			
 			}
@@ -171,7 +171,6 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	    "orderNumber": $scope.lastOrderNumber() + 1,
 	    "juice_id": $scope.formJuice,	        
 	    "qty": $scope.formQty,
-	    "date_time": $scope.formDateTime,
 	    "delivery_date": $scope.orderFormDate,
 	    "delivery_time_from": $scope.orderFormTimeFrom,
 	    "delivery_time_to": $scope.orderFormTimeTo,
@@ -255,19 +254,11 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 				}
 			break;
 
-			case 'formDateTimeCase':
-				if($scope.orderForm.formDateTime.$valid) {
-					$("#formGroupDateTime").removeClass("has-error");
+			case 'formDateCase':
+				if($scope.orderFormDate) {
+					$("#formGroupDate").removeClass("has-error");
 				} else {
-					$("#formGroupDateTime").addClass("has-error");
-				}
-			break;
-
-			case 'formAddressCase':
-				if($scope.orderForm.formAddress.$valid) {
-					$("#formGroupAddress").removeClass("has-error");
-				} else {
-					$("#formGroupAddress").addClass("has-error");
+					$("#formGroupDate").addClass("has-error");
 				}
 			break;
 
@@ -284,6 +275,14 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 					$("#formGroupTimeTo").removeClass("has-error");
 				} else {
 					$("#formGroupTimeTo").addClass("has-error");
+				}
+			break;
+
+			case 'formAddressCase':
+				if($scope.orderForm.formAddress.$valid) {
+					$("#formGroupAddress").removeClass("has-error");
+				} else {
+					$("#formGroupAddress").addClass("has-error");
 				}
 			break;
 
