@@ -34,24 +34,24 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	//Listener on datepicker - when changed it updates scope var
 	$("#datetimepicker5").on("dp.change", function() {
 		console.log("Date Changed!");
-		$scope.orderFormDate = $("#datetimepicker5").data("DateTimePicker").date().toString();
+		$scope.orderFormDate = $("#datetimepicker5").data("DateTimePicker").date().toString().slice(0,15);
 		//Digest the change of scope to refresh view
 		$scope.$digest();
+		//Format the input depending if filled or not
+		$scope.orderFormValidationFormatting('formDateCase');
 		console.log($scope.orderFormDate);
 	});
 	//Listener on time from picker
 	$("#datetimepicker3").on("dp.change", function() {
-		var timeFromHours = $("#datetimepicker3").data("DateTimePicker").date().hour().toString();
-		var timeFromMinutes = $("#datetimepicker3").data("DateTimePicker").date().minute().toString();
-		$scope.orderFormTimeFrom = timeFromHours + "h" + timeFromMinutes;
+		$scope.orderFormTimeFrom = $("#datetimepicker3").data("DateTimePicker").date().toString().slice(-17,-12);
 		$scope.$digest();
+		$scope.orderFormValidationFormatting('formTimeFromCase');
 	});
 	//Listener on time to picker
 	$("#datetimepicker4").on("dp.change", function() {
-		var timeToHours = $("#datetimepicker4").data("DateTimePicker").date().hour().toString();
-		var timeToMinutes = $("#datetimepicker4").data("DateTimePicker").date().minute().toString();
-		$scope.orderFormTimeTo = timeToHours + "h" + timeToMinutes;
+		$scope.orderFormTimeTo = $("#datetimepicker4").data("DateTimePicker").date().toString().slice(-17,-12);
 		$scope.$digest();
+		$scope.orderFormValidationFormatting('formTimeToCase');
 	});
 
 	firebase.auth().onAuthStateChanged(function(user) {

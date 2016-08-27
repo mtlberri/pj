@@ -407,7 +407,7 @@
             <td>{{ order.orderNumber }}</td>
             <td>{{ order.juice_id }}</td>
             <td>{{ order.qty }}</td>
-            <td>{{ order.delivery_date }} {{ order.delivery_time_from }} - {{ order.delivery_time_to }}</td>
+            <td>{{ order.delivery_date }} - from {{ order.delivery_time_from }} to {{ order.delivery_time_to }}</td>
             <td>{{ order.delivery_address }}</td>
             <td><span ng-class="{
             'label label-primary': order.status == 'ORDERED',
