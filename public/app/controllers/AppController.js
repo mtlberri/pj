@@ -130,7 +130,9 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 				if($scope.orderForm.formJuice.$valid && 
 					$scope.orderForm.formQty.$valid &&
 					$scope.orderForm.formDateTime.$valid &&
-					$scope.orderForm.formAddress.$valid) {
+					$scope.orderForm.formAddress.$valid &&
+					$scope.orderFormTimeFrom &&
+					$scope.orderFormTimeTo) {
 					//Programmatically call the Modal for order confirmation
 					$('#orderModal').modal();					
 				} else {
@@ -143,6 +145,8 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 					$scope.orderFormValidationFormatting('formQtyCase');
 					$scope.orderFormValidationFormatting('formDateTimeCase');
 					$scope.orderFormValidationFormatting('formAddressCase');
+					$scope.orderFormValidationFormatting('formTimeFromCase');
+					$scope.orderFormValidationFormatting('formTimeToCase');
 				}
 			
 			}
@@ -168,7 +172,9 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	    "juice_id": $scope.formJuice,	        
 	    "qty": $scope.formQty,
 	    "date_time": $scope.formDateTime,
-	    //"date": $scope.formDate,
+	    "delivery_date": $scope.orderFormDate,
+	    "delivery_time_from": $scope.orderFormTimeFrom,
+	    "delivery_time_to": $scope.orderFormTimeTo,
 	    "delivery_address": $scope.formAddress,
 	    "free_text": $scope.formFreeText,
 	    "status": "ORDERED",
@@ -262,6 +268,22 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 					$("#formGroupAddress").removeClass("has-error");
 				} else {
 					$("#formGroupAddress").addClass("has-error");
+				}
+			break;
+
+			case 'formTimeFromCase':
+				if($scope.orderFormTimeFrom) {
+					$("#formGroupTimeFrom").removeClass("has-error");
+				} else {
+					$("#formGroupTimeFrom").addClass("has-error");
+				}
+			break;
+
+			case 'formTimeToCase':
+				if($scope.orderFormTimeTo) {
+					$("#formGroupTimeTo").removeClass("has-error");
+				} else {
+					$("#formGroupTimeTo").addClass("has-error");
 				}
 			break;
 
