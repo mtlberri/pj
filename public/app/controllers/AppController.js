@@ -20,7 +20,7 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	//Init of date picker
 	$('#datetimepicker5').datetimepicker({
 	    format: "dddd, MMM Do",
-	    disabledDates: []
+	    minDate: moment().add(2,"days")
 	  });
 	//Init of time from picker
 	$('#datetimepicker3').datetimepicker({
@@ -43,7 +43,8 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	});
 	//Listener on time from picker
 	$("#datetimepicker3").on("dp.change", function() {
-		$scope.orderFormTimeFrom = $("#datetimepicker3").data("DateTimePicker").date().toString().slice(-17,-12);
+		//$scope.orderFormTimeFrom = $("#datetimepicker3").data("DateTimePicker").date().toString().slice(-17,-12);
+		$scope.orderFormTimeFrom = $("#datetimepicker3").data("DateTimePicker").date().toString();		
 		$scope.$digest();
 		$scope.orderFormValidationFormatting('formTimeFromCase');
 	});
