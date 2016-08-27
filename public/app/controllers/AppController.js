@@ -14,22 +14,12 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	$scope.formFreeText = null;
 	$scope.orderBeingCancelled = null;
 	$scope.orderFormDate = null;
-	$scope.orderFormTimeFrom = null;
-	$scope.orderFormTimeTo = null;
 
 	//Init of date picker
 	$('#datetimepicker5').datetimepicker({
 	    format: "dddd, MMM Do",
-	    minDate: moment().add(2,"days")
+	    //minDate: moment().add(2,"days")
 	  });
-	//Init of time from picker
-	$('#datetimepicker3').datetimepicker({
-	    format: "LT"
-	  });
-	//Init of time to picker
-	$('#datetimepicker4').datetimepicker({
-	    format: "LT"
-	  });	
 
 	//Listener on datepicker - when changed it updates scope var
 	$("#datetimepicker5").on("dp.change", function() {
@@ -40,19 +30,6 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 		//Format the input depending if filled or not
 		$scope.orderFormValidationFormatting('formDateCase');
 		console.log($scope.orderFormDate);
-	});
-	//Listener on time from picker
-	$("#datetimepicker3").on("dp.change", function() {
-		//$scope.orderFormTimeFrom = $("#datetimepicker3").data("DateTimePicker").date().toString().slice(-17,-12);
-		$scope.orderFormTimeFrom = $("#datetimepicker3").data("DateTimePicker").date().toString();		
-		$scope.$digest();
-		$scope.orderFormValidationFormatting('formTimeFromCase');
-	});
-	//Listener on time to picker
-	$("#datetimepicker4").on("dp.change", function() {
-		$scope.orderFormTimeTo = $("#datetimepicker4").data("DateTimePicker").date().toString().slice(-17,-12);
-		$scope.$digest();
-		$scope.orderFormValidationFormatting('formTimeToCase');
 	});
 
 	firebase.auth().onAuthStateChanged(function(user) {
@@ -132,8 +109,7 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 					$scope.orderForm.formQty.$valid &&
 					$scope.orderForm.formAddress.$valid &&
 					$scope.orderFormDate &&
-					$scope.orderFormTimeFrom &&
-					$scope.orderFormTimeTo) {
+					$scope.orderForm.formTimeSlot.$valid) {
 					//Programmatically call the Modal for order confirmation
 					$('#orderModal').modal();					
 				} else {
@@ -145,8 +121,7 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 					$scope.orderFormValidationFormatting('formJuiceCase');
 					$scope.orderFormValidationFormatting('formQtyCase');
 					$scope.orderFormValidationFormatting('formDateCase');
-					$scope.orderFormValidationFormatting('formTimeFromCase');
-					$scope.orderFormValidationFormatting('formTimeToCase');
+					$scope.orderFormValidationFormatting('formTimeSlotCase');
 					$scope.orderFormValidationFormatting('formAddressCase');
 				}
 			
@@ -173,8 +148,7 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	    "juice_id": $scope.formJuice,	        
 	    "qty": $scope.formQty,
 	    "delivery_date": $scope.orderFormDate,
-	    "delivery_time_from": $scope.orderFormTimeFrom,
-	    "delivery_time_to": $scope.orderFormTimeTo,
+	    "delivery_time_slot": $scope.formTimeSlot,
 	    "delivery_address": $scope.formAddress,
 	    "free_text": $scope.formFreeText,
 	    "status": "ORDERED",
@@ -189,6 +163,9 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 
 			console.log("Index " + ref.key + " created under user orders!");
 			});
+
+			$('#orderCreatedModal').modal();
+
 		}
 		else {
 			//Do Nothing
@@ -263,19 +240,11 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 				}
 			break;
 
-			case 'formTimeFromCase':
-				if($scope.orderFormTimeFrom) {
-					$("#formGroupTimeFrom").removeClass("has-error");
+			case 'formTimeSlotCase':
+				if($scope.orderForm.formTimeSlot.$valid) {
+					$("#formGroupTimeSlot").removeClass("has-error");
 				} else {
-					$("#formGroupTimeFrom").addClass("has-error");
-				}
-			break;
-
-			case 'formTimeToCase':
-				if($scope.orderFormTimeTo) {
-					$("#formGroupTimeTo").removeClass("has-error");
-				} else {
-					$("#formGroupTimeTo").addClass("has-error");
+					$("#formGroupTimeSlot").addClass("has-error");
 				}
 			break;
 

@@ -266,7 +266,7 @@
           </div> 
 
           <div class="form-group" id="formGroupDate">
-              <label for="datetimepicker5">Delivery Date</label>
+              <label for="datetimepicker5">Delivery Date  <a href=""><span class="glyphicon glyphicon-info-sign" onclick="$('#dateInfoModal').modal();"></span></a></label>
               <div class='input-group date' id='datetimepicker5' style="width:210px">
                   <input type='text' class="form-control" id="formDate" name="formDate" required>
                   <span class="input-group-addon">
@@ -276,27 +276,35 @@
           </div>
 
 
-          <div class="form-group" id="formGroupTimeFrom">
-              <label for="datetimepicker3">Delivery Time (From)</label>
-              <div class='input-group date' id='datetimepicker3' style="width:210px">
-                  <input type='text' class="form-control" id="formTimeFrom" name="formTimeFrom" required>
-                  <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-time"></span>
-                  </span>
+
+        <!-- Modal Date Info -->
+        <div class="modal fade" id="dateInfoModal" tabindex="-1" role="dialog" aria-labelledby="orderFieldsMissingModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="dateInfoModal">Chosing your Delivery Date and Time</h4>
               </div>
-          </div>
-
-          <div class="form-group" id="formGroupTimeTo">
-              <label for="datetimepicker4">Delivery Time (To)</label>
-              <div class='input-group date' id='datetimepicker4' style="width:210px">
-                  <input type='text' class="form-control" id="formTimeTo" name="formTimeTo" required>
-                  <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-time"></span>
-                  </span>
+              <div class="modal-body">
+                Due to the fact that I need to buy my fresh veggetables and fruits, I need at least 24h in between the moment you order and your expected delivery time.
               </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+              </div>
+            </div>
           </div>
+        </div> <!-- END of Modal Date Info-->
 
 
+
+
+          <div class="form-group input-group" id="formGroupTimeSlot" style="width:240px">
+            <label for="formTimeSlot">Delivery Time Slot</label>
+            <select class="form-control" id="formTimeSlot" ng-model="formTimeSlot" name="formTimeSlot" ng-change="orderFormValidationFormatting('formTimeSlotCase')" required>
+              <option>Morning 7:30AM to 8:00AM</option>
+              <option>Evening 8:30PM to 9:00PM</option>
+            </select>
+          </div> 
 
 
           <div class="form-group" id="formGroupAddress">
@@ -328,9 +336,7 @@
                   <ul class="list-group">
                     <li class="list-group-item"><b>Juice:</b> {{ formJuice }}</li>
                     <li class="list-group-item"><b>Quantity:</b> {{ formQty }}</li>
-                    <li class="list-group-item"><b>Delivery Date:</b> {{ orderFormDate }}</li>
-                    <li class="list-group-item"><b>Delivery Time (From):</b> {{ orderFormTimeFrom }}</li>
-                    <li class="list-group-item"><b>Delivery Time (To):</b> {{ orderFormTimeTo }}</li>
+                    <li class="list-group-item"><b>Delivery Date &amp Time:</b> {{ orderFormDate }} - {{ formTimeSlot }}</li>
                     <li class="list-group-item"><b>Delivery Address:</b> {{ formAddress }}</li>
                     <li class="list-group-item"><b>Message to @plateaujuices:</b> {{ formFreeText }}</li>
                   </ul>
@@ -343,6 +349,34 @@
             </div>
           </div>
         </div> <!-- END of Order Modal -->
+
+
+
+
+
+
+
+
+        <!-- Modal Order Created! Info -->
+        <div class="modal fade" id="orderCreatedModal" tabindex="-1" role="dialog" aria-labelledby="orderCreatedModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="orderCreatedModal">Your Order has been created!</h4>
+              </div>
+              <div class="modal-body">
+                You can check-out the status of your order in the "Your Orders" table below
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+              </div>
+            </div>
+          </div>
+        </div> <!-- Modal Order Created! Info-->
+
+
+
 
 
 
@@ -407,7 +441,7 @@
             <td>{{ order.orderNumber }}</td>
             <td>{{ order.juice_id }}</td>
             <td>{{ order.qty }}</td>
-            <td>{{ order.delivery_date }} - from {{ order.delivery_time_from }} to {{ order.delivery_time_to }}</td>
+            <td>{{ order.delivery_date }} - {{ order.delivery_time_slot }}</td>
             <td>{{ order.delivery_address }}</td>
             <td><span ng-class="{
             'label label-primary': order.status == 'ORDERED',
@@ -453,6 +487,11 @@
           <span class="label label-info">IN PROGRESS</span><span> &raquo;</span>
           <span class="label label-success">DELIVERED</span>
         </p>
+
+        <p style="text-align:center"> 
+          Due to the fact that I need to buy my fresh veggetables and fruits, I need at least 24h in between the moment you order and your expected delivery time.
+        </p>
+        
         <p style="text-align:center"> 
           It may happen that I cannot deliver at the time you originally asked for in your order. <br>
           Do not worry, in such a case I will set the order status to <span class="label label-warning">OOPS SORRY</span> and connect with you via e-mail to find a better time for both of us.
