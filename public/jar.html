@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html ng-app="pjApp">
+  <head>
+
+  <!-- //////////////////////////////////HEADER/////////////////////////////////////// -->
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="images/favicon.ico">
+
+    <title>PJ JAR</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="jumbotron.css" rel="stylesheet"> 
+
+    <!-- Firebase configuration -->
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase and configure it
+      var config = {
+        apiKey: "AIzaSyCleCXI68tsiwMnY8-VKDKBaF3NscCc0aU",
+        authDomain: "plateaujuicing.firebaseapp.com",
+        databaseURL: "https://plateaujuicing.firebaseio.com",
+        storageBucket: "plateaujuicing.appspot.com",
+      };
+      firebase.initializeApp(config);
+    </script>
+    
+    <!-- FirebaseUI for Web Auth: Installation -->
+    <script src="https://www.gstatic.com/firebasejs/ui/live/0.4/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/live/0.4/firebase-ui-auth.css" />
+    <script>
+      // FirebaseUI config.
+      var uiConfig = {
+        'signInSuccessUrl': 'http://localhost:5000/jar.html',
+        'signInOptions': [
+          // Leave the lines as is for the providers you want to offer your users.
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+          firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+          //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+          //firebase.auth.GithubAuthProvider.PROVIDER_ID,
+          firebase.auth.EmailAuthProvider.PROVIDER_ID
+        ],
+        // Terms of service url.
+        'tosUrl': '<your-tos-url>',
+      };
+
+      // Initialize the FirebaseUI Widget using Firebase.
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+      // The start method will wait until the DOM is loaded.
+      ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
+
+  <!-- jQuery -->
+  <script src="node_modules/jquery/dist/jquery.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>  
+
+  <!-- AngularJS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <!-- AngularFire -->
+  <script src="https://cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js"></script>
+  <!-- PJ App Javascript -->
+  <script src="app/controllers/AppController.js"></script>
+  <!-- Main JavaScript file -->
+  <script src="js/mainJavaScript.js"></script>
+  <!-- IG Embed -->
+  <script async defer src="//platform.instagram.com/en_US/embeds.js"></script>
+
+
+  <!-- DateTimePicker -->
+  <script type="text/javascript" src="bower_components/moment/min/moment.min.js"></script>
+  <script type="text/javascript" src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+  <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+
+
+  </head>
+
+<!-- //////////////////////////////////BODY/////////////////////////////////////// -->
+
+  <body ng-controller="AppController">
+  
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Plateau Juices</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+
+          <div class="navbar-right">
+
+            <span id="user_name_navbar" style="color: #777;">Please Sign in </span>
+            
+            <span style="color: #777;">( </span>
+              <a id="sign_in_out" href="http://localhost:5000/" style="color: #777;" onclick="firebase.auth().signOut();"></a>
+            <span style="color: #777;"> )</span>
+            
+            <img id="userPhoto" src="images/default_user.png" alt="User photo" class="img-circle" style="width:40px;height:40px;margin:5px;">
+
+          </div>
+
+        </div><!--/.navbar-collapse -->
+        
+      </div>
+    </nav>
+
+
+
+    <!-- Firebase UI Auth container -->
+    <div id="firebaseui-auth-container"></div>
+
+    <div class="container"> <!-- START of Orders List CONTAINER Div --> 
+    <hr>
+
+      <!-- AngularJS Table of Orders -->
+      <h1 style="text-align:center;">All Orders:</h1>
+      <div>
+        <table class="table">
+          <tr>
+            <th>Order #</th>
+            <th>Juice</th>
+            <th>Quantity</th>
+            <th>Delivery Date &amp Time</th>
+            <th>Delivery Address</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+          <tr ng-repeat="order in orders | filter : jarTableFilterFunction">
+            <td>{{ order.orderNumber }}</td>
+            <td>{{ order.juice_id }}</td>
+            <td>{{ order.qty }}</td>
+            <td>{{ order.delivery_date }} - {{ order.delivery_time_slot }}</td>
+            <td>{{ order.delivery_address }}</td>
+            <td><span ng-class="{
+            'label label-primary': order.status == 'ORDERED',
+            'label label-info': order.status == 'IN PROGRESS',
+            'label label-success': order.status == 'DELIVERED',
+            'label label-warning': order.status == 'OOPS SORRY',
+            'label label-default': order.status == 'CANCELLED'
+            }">{{ order.status }}</span></td>
+            <td>
+              <button type="button" class="btn btn-default" ng-show="order.status == 'ORDERED'" ng-click="cancelBtnPressed(order)">Cancel
+              </button>
+            </td>
+          </tr>          
+        </table>
+
+      </div>
+
+
+
+
+      <!-- Modal (Order Cancel Pressed) -->
+      <div class="modal fade" id="orderCancelModal" tabindex="-1" role="dialog" aria-labelledby="orderCancelModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="orderCancelModalLabel">Are you sure you want to Cancel that order?</h4>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+              <button type="button" class="btn btn-primary" ng-click="changeOrderStatus(orderBeingCancelled,'CANCELLED')" data-dismiss="modal">Cancel!
+            </div>
+          </div>
+        </div>
+      </div> <!-- END of Modal (Order Cancel Pressed)-->
+
+
+
+
+    <div class="container">
+      <footer>
+        <p style="text-align:center;">&copy; Plateau Juices</p>
+      </footer>
+    </div>
+
+  </body>
+</html>

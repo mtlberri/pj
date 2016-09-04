@@ -210,6 +210,19 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 		return result;
 	};	
 
+
+	//Method to filter orders in table (depending on order status, ...)
+	$scope.jarTableFilterFunction = function(value, index, array) {
+		var result;
+		// If order is not archived and belongs to User, then displayed in table
+		if (value.status != "ARCHIVED" && $scope.uid == "M29HBj83K9RY3S8YtSqqvglPJrG2") {
+			result = true;
+		} else {
+			result = false;
+		}
+		return result;
+	};	
+
 	//Format order form "formId" if entry is not valid
 	$scope.orderFormValidationFormatting = function(formIdCase){
 
