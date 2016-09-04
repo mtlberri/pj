@@ -155,7 +155,10 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	    "status": "ORDERED",
 	    "paid": false,
 	    "userUid": firebase.auth().currentUser.uid,
-	    "userDisplayName": firebase.auth().currentUser.displayName       
+	    "userDisplayName": firebase.auth().currentUser.displayName,
+	    "history":  {
+	    	"Order Created": moment().toString()
+	    }     
 		}).then(function(ref) {
 
 			//Index the order under the users/<userUid>/userOrders/ part of the tree
@@ -204,8 +207,10 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	//Method to change order status
 	$scope.changeOrderStatus = function(order,newStatus) {
 		order.status = newStatus;
+		order.history = order.history + moment().toString() + ": Order status changed to " + newStatus + "; ";
 		$scope.orders.$save(order);
 		console.log("order status changed to: " + newStatus);
+
 	};
 
 	//Method to change order payment
