@@ -13,6 +13,7 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	//various global scope variables initialization
 	$scope.formFreeText = null;
 	$scope.orderBeingCancelled = null;
+	$scope.orderBeingPaid = null;
 	$scope.orderFormDate = null;
 
 	//Init of date picker
@@ -191,12 +192,28 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 		$('#orderCancelModal').modal();
 	};	
 
+	//Method called when Payment button pressed
+	$scope.paymentBtnPressed = function(orderToPay) {
+		console.log("Payment button pressed!");
+		//Record the order being paid for use by pop-up modal
+		$scope.orderBeingPaid = orderToPay;
+		//Pop-up modal
+		$('#orderPaymentModal').modal();
+	};	
+
 	//Method to change order status
 	$scope.changeOrderStatus = function(order,newStatus) {
 		order.status = newStatus;
 		$scope.orders.$save(order);
-		console.log("order status changed!");
+		console.log("order status changed to: " + newStatus);
 	};
+
+	//Method to change order payment
+	$scope.changeOrderPayment = function() {
+		$scope.orderBeingPaid.paid = $scope.paymentAmount;
+		$scope.orders.$save($scope.orderBeingPaid);
+		console.log("order payment set to: " + $scope.paymentAmount);
+	};	
 
 	//Method to filter orders in table (depending on order status, ...)
 	$scope.tableFilterFunction = function(value, index, array) {

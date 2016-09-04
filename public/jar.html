@@ -153,8 +153,28 @@
             'label label-default': order.status == 'CANCELLED'
             }">{{ order.status }}</span></td>
             <td>
-              <button type="button" class="btn btn-default" ng-show="order.status == 'ORDERED'" ng-click="cancelBtnPressed(order)">Cancel
+
+              <button type="button" class="btn btn-primary btn-xs" ng-click="changeOrderStatus(order,'ORDERED')">ORDERED
+              </button><br>
+
+              <button type="button" class="btn btn-info btn-xs" ng-click="changeOrderStatus(order,'IN PROGRESS')">IN PROGRESS
+              </button><br>
+
+              <button type="button" class="btn btn-success btn-xs" ng-click="changeOrderStatus(order,'DELIVERED')">DELIVERED
+              </button><br>
+
+               <button type="button" class="btn btn-default btn-xs" ng-click="paymentBtnPressed(order)">PAYMENT
+              </button><br>                      
+
+              <button type="button" class="btn btn-warning btn-xs" ng-click="changeOrderStatus(order,'OOPS SORRY')">OOPS SORRY
+              </button><br>
+
+              <button type="button" class="btn btn-default btn-xs" ng-click="changeOrderStatus(order,'CANCELLED')">CANCELLED
+              </button><br>
+
+              <button type="button" class="btn btn-default btn-xs" ng-click="changeOrderStatus(order,'ARCHIVED')">ARCHIVED
               </button>
+
             </td>
           </tr>          
         </table>
@@ -162,24 +182,36 @@
       </div>
 
 
-
-
-      <!-- Modal (Order Cancel Pressed) -->
-      <div class="modal fade" id="orderCancelModal" tabindex="-1" role="dialog" aria-labelledby="orderCancelModalLabel">
+      <!-- Modal (Order Payment Pressed) -->
+      <div class="modal fade" id="orderPaymentModal" tabindex="-1" role="dialog" aria-labelledby="orderPaymentModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="orderCancelModalLabel">Are you sure you want to Cancel that order?</h4>
+              <h4 class="modal-title" id="orderPaymentModalLabel">Order Payment</h4>
             </div>
+
+            <div class="modal-body">
+
+              <form class="form-inline">
+                <div class="form-group">
+                  <label class="sr-only" for="PaymentAmount">Amount (in dollars)</label>
+                  <div class="input-group">
+                    <div class="input-group-addon">$</div>
+                    <input type="number" class="form-control" id="PaymentAmount" placeholder="Amount" ng-model="paymentAmount">
+                  </div>
+                </div>
+              </form>
+
+            </div>
+
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-              <button type="button" class="btn btn-primary" ng-click="changeOrderStatus(orderBeingCancelled,'CANCELLED')" data-dismiss="modal">Cancel!
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" ng-click="changeOrderPayment()" data-dismiss="modal">Set Payment!
             </div>
           </div>
         </div>
-      </div> <!-- END of Modal (Order Cancel Pressed)-->
-
+      </div> <!-- END of Modal (Order Payment Pressed)-->
 
 
 
