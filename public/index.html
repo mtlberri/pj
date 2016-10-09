@@ -39,7 +39,7 @@
     <script>
       // FirebaseUI config.
       var uiConfig = {
-        'signInSuccessUrl': 'http://localhost:5000/',
+        'signInSuccessUrl': 'https://plateaujuicing.firebaseapp.com/',
         'signInOptions': [
           // Leave the lines as is for the providers you want to offer your users.
           firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -106,7 +106,7 @@
             <span id="user_name_navbar" style="color: #777;">Please Sign in </span>
             
             <span style="color: #777;">( </span>
-              <a id="sign_in_out" href="http://localhost:5000/" style="color: #777;" onclick="firebase.auth().signOut();"></a>
+              <a id="sign_in_out" href="https://plateaujuicing.firebaseapp.com/" style="color: #777;" onclick="firebase.auth().signOut();"></a>
             <span style="color: #777;"> )</span>
             
             <img id="userPhoto" src="images/default_user.png" alt="User photo" class="img-circle" style="width:40px;height:40px;margin:5px;">

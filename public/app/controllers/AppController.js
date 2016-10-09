@@ -140,7 +140,6 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 
 	//Method to add a new Order, called by the form ng-submit
 	$scope.addOrder = function(){
-
 		if ($scope.uid) {
 		//Add the order in the overall list of orders (Firebase)
 		console.log("Add Order to Firebase!");
@@ -156,9 +155,7 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	    "paid": false,
 	    "userUid": firebase.auth().currentUser.uid,
 	    "userDisplayName": firebase.auth().currentUser.displayName,
-	    "history":  {
-	    	"Order Created": moment().toString()
-	    }     
+	    "history": moment().toString() + ": Order created; "    
 		}).then(function(ref) {
 
 			//Index the order under the users/<userUid>/userOrders/ part of the tree
@@ -207,15 +204,16 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 	//Method to change order status
 	$scope.changeOrderStatus = function(order,newStatus) {
 		order.status = newStatus;
-		order.history = order.history + moment().toString() + ": Order status changed to " + newStatus + "; ";
+		order.history += moment().toString() + ": Order status changed to " + newStatus + "; ";
 		$scope.orders.$save(order);
 		console.log("order status changed to: " + newStatus);
 
 	};
 
 	//Method to change order payment
-	$scope.changeOrderPayment = function() {
+	$scope.setOrderPayment = function() {
 		$scope.orderBeingPaid.paid = $scope.paymentAmount;
+		$scope.orderBeingPaid.history += moment().toString() + ": Order paid " + $scope.paymentAmount + "; "
 		$scope.orders.$save($scope.orderBeingPaid);
 		console.log("order payment set to: " + $scope.paymentAmount);
 	};	
