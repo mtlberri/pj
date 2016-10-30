@@ -132,6 +132,7 @@
         <table class="table">
           <tr>
             <th>Order #</th>
+            <th>Client</th>
             <th>Juice</th>
             <th>Quantity</th>
             <th>Delivery Date &amp Time</th>
@@ -141,6 +142,7 @@
           </tr>
           <tr ng-repeat="order in orders | filter : jarTableFilterFunction">
             <td>{{ order.orderNumber }}</td>
+            <td>{{ order.userDisplayName }}</td>
             <td>{{ order.juice_id }}</td>
             <td>{{ order.qty }}</td>
             <td>{{ order.delivery_date }} - {{ order.delivery_time_slot }}</td>
