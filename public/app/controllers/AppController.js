@@ -59,6 +59,13 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 				console.log("Hide Firebase UI Auth please!");
 				$("#firebaseui-auth-container").slideUp(1000);  
 
+				//Enable Ordering Form
+				$("#orderFormId :input").prop("disabled", false);
+				//Adapt the text for Ordering Form
+				$("#signed_out_text_Order").hide();
+				$("#signed_in_text_Order").show();
+
+
 				// Push user account details to HTML content
 				if (photoURL != null) {
 					//Use valid Photo URL from Google or Facebook 
@@ -88,6 +95,13 @@ app.controller("AppController", ["$scope", "$firebaseArray",
 			console.log("$scope.orders synced with Firebase!");
 
 		} else {
+			
+			//Disable Ordering Form
+			$("#orderFormId :input").prop("disabled", true);
+			//Adapt the text for Ordering Form
+			$("#signed_out_text_Order").show();
+			$("#signed_in_text_Order").hide();
+
 			console.log("User is Logged Out!");
 			$scope.uid = null;
 			console.log("$scope.uid set to null");

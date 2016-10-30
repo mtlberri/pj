@@ -4,7 +4,6 @@ body {
   padding-bottom: 20px;
 }
 
-
 /* Juices Description */
 img.juices_pictures {
 	width:38%; 
@@ -26,7 +25,7 @@ div.juices_description_ingredients {
 div.connect_container {
 	margin: auto;
 	width:350px; 
-	height:550px;
+	height:1000px;
 }
 .connect_element {
 	width:350px; 

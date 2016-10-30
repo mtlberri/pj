@@ -122,8 +122,11 @@
     <div class="jumbotron">
       <div class="container">
         <h1>Local Juices <br>Delivered to Your Door</h1>
-        <p>Delivering amazing Juices of freshly pressed veggetables and fruits. <br>
-        In Montreal Le Plateau neighborhood.</p>
+        <p>
+        First Juice order is FREE (Regular 17oz price is 6$)<br>
+        Delivery To Your Door: Montreal Le Plateau<br>
+        Payment: Cash at delivery<br>
+        </p>
 
         <p><a class="btn btn-default" href="https://www.instagram.com/plateaujuices/?hl=en" target="_blank" role="button">Learn more about me, visit my <i>@plateaujuices</i> Instagram <img src="images/Instagram-v051916_200.png" style="width:20px;height:20px"> &raquo;</a></p>
 
@@ -239,10 +242,18 @@
 
 
       <!-- AngularJS Order Form -->
-      <h1 style="text-align:center;">Order Your Juice:</h1>
+      <div id="signed_in_text_Order">
+        <h1 style="text-align:center;">Order Your Juice:</h1>
+      </div>
+      
+      <div id="signed_out_text_Order">
+        <h3 style="text-align:center;">Please Sign In before Ordering <br>
+        (Sign in is at the top of this page)</h3>
+      </div>
+
       <div>
        
-        <form novalidate class="css-form" ng-submit="orderClicked()" name="orderForm">
+        <form novalidate class="css-form" ng-submit="orderClicked()" name="orderForm" id="orderFormId">
 
           <div class="form-group" id="formGroupJuice">
             <label for="formJuice">Juice</label>
@@ -308,7 +319,7 @@
 
 
           <div class="form-group" id="formGroupAddress">
-            <label for="formAddress">Delivery Address:</label>
+            <label for="formAddress">Delivery Address (Plateau area only):</label>
             <input type="text" class="form-control" style="width:300px" placeholder="E.g.: 4704 Rue de la Roche, Appartment#2" id="formAddress" ng-model="formAddress" name="formAddress" ng-change="orderFormValidationFormatting('formAddressCase')" required>
           </div>
 
@@ -514,6 +525,18 @@
         <p><a class="btn btn-default connect_element" href="https://www.instagram.com/plateaujuices/?hl=en" target="_blank" role="button"><b>@plateaujuices</b> <img src="images/Instagram-v051916_200.png" style="width:20px;height:20px"> &raquo;</a></p>
 
         <blockquote class="instagram-media" data-instgrm-version="7" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:658px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:8px;"> <div style=" background:#F8F8F8; line-height:0; margin-top:40px; padding:50.0% 0; text-align:center; width:100%;"> <div style=" background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAMUExURczMzPf399fX1+bm5mzY9AMAAADiSURBVDjLvZXbEsMgCES5/P8/t9FuRVCRmU73JWlzosgSIIZURCjo/ad+EQJJB4Hv8BFt+IDpQoCx1wjOSBFhh2XssxEIYn3ulI/6MNReE07UIWJEv8UEOWDS88LY97kqyTliJKKtuYBbruAyVh5wOHiXmpi5we58Ek028czwyuQdLKPG1Bkb4NnM+VeAnfHqn1k4+GPT6uGQcvu2h2OVuIf/gWUFyy8OWEpdyZSa3aVCqpVoVvzZZ2VTnn2wU8qzVjDDetO90GSy9mVLqtgYSy231MxrY6I2gGqjrTY0L8fxCxfCBbhWrsYYAAAAAElFTkSuQmCC); display:block; height:44px; margin:0 auto -44px; position:relative; top:-22px; width:44px;"></div></div><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/p/6-Xjc5yKmx/" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">A photo posted by Plateau Juices (@plateaujuices)</a> on <time style=" font-family:Arial,sans-serif; font-size:14px; line-height:17px;" datetime="2015-08-29T16:46:36+00:00">Aug 29, 2015 at 9:46am PDT</time></p></div></blockquote>
+
+
+        <br>
+        <br>
+        <p><a class="btn btn-default connect_element" href="https://www.facebook.com/plateaujuicing/" target="_blank" role="button"><b>facebook.com/plateaujuicing</b> <img src="images/FB-fLogo-Blue-broadcast-2.png" style="width:20px;height:20px"> &raquo;</a></p>
+
+
+        <div class="fb-post" data-href="https://www.facebook.com/plateaujuicing/posts/679249902246013" data-width="500" data-show-text="true"><blockquote cite="https://www.facebook.com/plateaujuicing/posts/679249902246013" class="fb-xfbml-parse-ignore">Posted by <a href="https://www.facebook.com/plateaujuicing/">Plateau Juicing</a> on&nbsp;<a href="https://www.facebook.com/plateaujuicing/posts/679249902246013">Saturday, October 29, 2016</a></blockquote></div>
+
+
+
+
 
       </div>
 
